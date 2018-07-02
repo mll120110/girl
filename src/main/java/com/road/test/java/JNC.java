@@ -1,5 +1,6 @@
 package com.road.test.java;
 
+import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -8,6 +9,7 @@ import java.util.concurrent.Executors;
 public class JNC {
 
 	public static void main(String[] args) throws InterruptedException {
+
 		final CountDownLatch countDownLatch = new CountDownLatch(4);
 		Runnable run1 = new Runnable() {
 
@@ -114,5 +116,25 @@ public class JNC {
 			});
 
 		}
+
+		String sql = "hashCode";
+		System.out.println("120 row" + sql.hashCode());
+		int h =0,hash;
+	  char[] value = {'h','a','s','h','C','o','d','e'};
+		if (h == 0 && value.length > 0) {
+			char val[] = value;
+
+			for (int i = 0; i < value.length; i++) {
+				h = 31 * h + val[i];
+				System.out.println("h"+h);
+			}
+			hash = h;
+			System.out.println("hash值"+hash);
+		}
+		System.out.println(sql.hashCode() ^ (sql.hashCode() >>> 16));
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap.hashCode();
+		hashMap.put("key", "value");
+
 	}
 }
