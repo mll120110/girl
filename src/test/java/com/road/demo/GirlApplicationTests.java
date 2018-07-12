@@ -1,10 +1,12 @@
 package com.road.demo;
 
-import com.road.test.java.HashMapThread;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.github.binarywang.java.emoji.EmojiConverter;
+import com.road.test.java.HashMapThread;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -89,6 +91,38 @@ public class GirlApplicationTests {
 		int sum = a + b;
 		System.out.println("a+b: " + sum);
 
+	}
+
+	@Test
+	public void testToAlias() {
+		int a = 0;
+		if (false) {
+			a = 1;
+			System.out.println(a);
+		} else if (true) {
+			a = 2;
+			System.out.println(a);
+		} else if (true) {
+			a = 3;
+			System.out.println(a);
+		}
+	}
+
+	/**
+	 * 冒泡排序算法，简单实践
+	 */
+	@Test
+	public void testBubbleSort() {
+		int a[] = new int[] { 9, 12, 13, 28, 43 };
+		for (int i = 0; i < a.length; i++) {
+			for (int j = 0; j < a.length - 1; j++) {
+				if (a[j] > a[j + 1]) {
+					int value = a[j];
+					a[j] = a[j + 1];
+					a[j + 1] = value;
+				}
+			}
+		}
 	}
 
 }
