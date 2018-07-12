@@ -20,7 +20,6 @@ public class JNC {
 					System.out.println("统计C盘");
 					countDownLatch.countDown();// 单任务，把计数器减1
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -34,7 +33,6 @@ public class JNC {
 					System.out.println("统计D盘");
 					countDownLatch.countDown();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -48,7 +46,6 @@ public class JNC {
 					System.out.println("统计E盘");
 					countDownLatch.countDown();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -62,7 +59,6 @@ public class JNC {
 					System.out.println("统计F盘");
 					countDownLatch.countDown();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
