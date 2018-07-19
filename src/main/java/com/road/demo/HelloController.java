@@ -1,5 +1,6 @@
 package com.road.demo;
 
+import com.road.test.java.StaticThreadTest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ public class HelloController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String say() {
+        StaticThreadTest staticThreadTest = new StaticThreadTest();
         return content;
     }
 
