@@ -21,5 +21,6 @@ public class InterceptorClient {
 		}else {
 			System.out.println("No Response");
 		}
+		System.out.println("Finish");
 	}
 }
