@@ -2,13 +2,15 @@ package com.road.test.java;
 
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class JNC {
 
 	public static void main(String[] args) throws InterruptedException {
+
+		int corePoolSize = Runtime.getRuntime().availableProcessors();
+		System.out.println(corePoolSize);
 
 		final CountDownLatch countDownLatch = new CountDownLatch(4);
 		Runnable run1 = new Runnable() {
@@ -75,25 +77,6 @@ public class JNC {
 		service.shutdown();
 
 		/**
-		 * 设置线程池核心数量与最大数量一致
-		 */
-		ExecutorService executorService = Executors.newFixedThreadPool(4);
-		for (int j = 0; j < 10; j++) {
-			int index1 = j;
-			executorService.execute(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						System.out.println("newFixedThreadPool个" + index1 + "个线程");
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
-
-		/**
 		 * 创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程。
 		 */
 		ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
@@ -115,17 +98,17 @@ public class JNC {
 
 		String sql = "hashCode";
 		System.out.println("120 row" + sql.hashCode());
-		int h =0,hash;
-	  char[] value = {'h','a','s','h','C','o','d','e'};
+		int h = 0, hash;
+		char[] value = { 'h', 'a', 's', 'h', 'C', 'o', 'd', 'e' };
 		if (h == 0 && value.length > 0) {
 			char val[] = value;
 
 			for (int i = 0; i < value.length; i++) {
 				h = 31 * h + val[i];
-				System.out.println("h"+h);
+				System.out.println("h" + h);
 			}
 			hash = h;
-			System.out.println("hash值"+hash);
+			System.out.println("hash值" + hash);
 		}
 		System.out.println(sql.hashCode() ^ (sql.hashCode() >>> 16));
 		HashMap<String, String> hashMap = new HashMap<String, String>();
