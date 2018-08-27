@@ -124,4 +124,9 @@ public class GirlApplicationTests {
 		}
 	}
 
+	@Test
+	public void BitOperationTest() {
+		System.out.println(2 << 24);
+	}
+
 }
