@@ -3,3 +3,13 @@ server:
 cupSize: B
 age: 18
 content: "cupSize: ${cupSize},age: ${age}"
+spring:
+  #数据库配置
+  datasource:
+    url: jdbc:mysql://192.168.0.57:3306/villagesale
+    username: root
+    password: eteng
+    driver-class-name: com.mysql.jdbc.Driver
+  #关闭启动banner
+  main:
+    banner-mode: "off"

@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    @Value("${cupSize}")
-    private String cupSize;
+	@Value("${cupSize}")
+	private String cupSize;
 
-    @Value("${age}")
-    private Integer age;
+	@Value("${age}")
+	private Integer age;
 
-    @Value("${content}")
-    private String content;
+	@Value("${content}")
+	private String content;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String say() {
-        StaticThreadTest staticThreadTest = new StaticThreadTest();
-        return content;
-    }
-
-
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public String say() {
+		StaticThreadTest staticThreadTest = new StaticThreadTest();
+		return content;
+	}
 }
