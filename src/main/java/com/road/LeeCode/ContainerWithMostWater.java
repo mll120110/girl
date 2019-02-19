@@ -21,9 +21,8 @@ public class ContainerWithMostWater {
 			} else {
 				j--;
 			}
-			return res;
 		}
-		return 0;
+		return res;
 	}
 
 	public int maxArea(int[] height) {

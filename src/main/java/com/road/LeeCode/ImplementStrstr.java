@@ -76,6 +76,12 @@ public class ImplementStrstr {
 		return null;
 	}
 
+	/**
+	 * KMP算法
+	 * 
+	 * @param arr
+	 * @return
+	 */
 	private int[] makeNext(char[] arr) {
 		int len = arr.length;
 		int[] next = new int[len];
