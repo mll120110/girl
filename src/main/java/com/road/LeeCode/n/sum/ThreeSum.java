@@ -1,4 +1,4 @@
-package com.road.LeeCode;
+package com.road.LeeCode.n.sum;
 
 import java.util.*;
 
