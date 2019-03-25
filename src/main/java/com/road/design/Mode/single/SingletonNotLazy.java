@@ -4,12 +4,14 @@ package com.road.design.Mode.single;
  * 单例饿汉模式
  */
 public class SingletonNotLazy {
-	private static SingletonNotLazy instance = new SingletonNotLazy();
+    private volatile static SingletonNotLazy instance = new SingletonNotLazy();
 
-	private SingletonNotLazy() {
-	}
+    private SingletonNotLazy() {}
 
-	public static SingletonNotLazy getInstance() {
-		return instance;
-	}
+    public static SingletonNotLazy getInstance() {
+        synchronized (SingletonNotLazy.class) {
+            return instance;
+        }
+
+    }
 }

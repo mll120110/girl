@@ -1,7 +1,7 @@
 package com.road.design.Mode.single;
 
 /**
- * 单例模式双重锁/双重校验所
+ * 单例模式双重锁/双重校验
  */
 public class SingletonDoubleLock {
 	private volatile static SingletonDoubleLock singleton;
