@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8081
 cupSize: B
 age: 18
 content: "cupSize: ${cupSize},age: ${age}"
 spring:
   #数据库配置
   datasource:
-    url: jdbc:mysql://10.1.7.126:3306/vics_system
+    url: jdbc:mysql://10.1.7.126:3306/spring_boot?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&nullNamePatternMatchesAll=true
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
