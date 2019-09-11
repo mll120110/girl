@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "BdUser对象", description = "")
+@ApiModel(value = "BaseEntity对象", description = "")
 public class BaseEntity {
 
     private static final long serialVersionUID = 1L;
