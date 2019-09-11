@@ -1,4 +1,4 @@
-package com.vision.controller;
+package com.vision.user;
 
 import com.vision.girl.user.entity.BdDevice;
 import com.vision.girl.user.entity.BdUser;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class BdUserControllerTest {
+public class BdUserServiceTest {
     @Autowired
     IBdUserService iBdUserService;
 
@@ -31,7 +31,7 @@ public class BdUserControllerTest {
     // 实例化device信息
     BdDevice bdDevice;
 
-    public BdUserControllerTest() {
+    public BdUserServiceTest() {
         // 实例化user信息
         bdUser = new BdUser();
         bdUser.setUserId(UUID.randomUUID().toString());
@@ -53,18 +53,18 @@ public class BdUserControllerTest {
     }
 
     @Test
-    public void createUser() {
+    public void createUser() throws Exception {
         iBdUserService.createUser(bdUser);
     }
 
     @Test
-    public void updateUser() {
+    public void updateUser() throws Exception {
         bdUser.setUpdateTime(LocalDateTime.now());
         iBdUserService.updateUser(bdUser);
     }
 
     @Test
-    public void createUserAndDevice() {
+    public void createUserAndDevice() throws Exception {
         UserDeviceBean userDeviceBean = new UserDeviceBean();
         userDeviceBean.setBdUser(bdUser);
         userDeviceBean.setBdDevice(bdDevice);
