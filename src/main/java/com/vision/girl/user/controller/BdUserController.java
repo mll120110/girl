@@ -1,17 +1,14 @@
 package com.vision.girl.user.controller;
 
+import com.vision.girl.common.BaseController;
 import com.vision.girl.user.entity.BdUser;
+import com.vision.girl.user.entity.UserDeviceBean;
 import com.vision.girl.user.service.IBdUserService;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.vision.girl.common.BaseController;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -28,19 +25,39 @@ public class BdUserController extends BaseController {
     @Autowired
     IBdUserService userService;
 
+    /**
+     * 新增用户
+     *
+     * @param bdUser
+     * @return
+     */
     @PostMapping(value = "createUser")
-    public int createUser() {
-        BdUser bdUser = new BdUser();
-        bdUser.setUserId(UUID.randomUUID().toString());
-        bdUser.setUserName("Jack Road");
-        bdUser.setState(0);
-        bdUser.setUpdateTime(LocalDateTime.now());
-        bdUser.setCreateTime(LocalDateTime.now());
+    @ApiModelProperty(value = "创建用户信息")
+    public int createUser(@RequestBody BdUser bdUser) {
         return userService.createUser(bdUser);
     }
 
+    /**
+     * 更新用户信息
+     * 
+     * @param bdUser
+     * @return
+     */
     @PostMapping(value = "updateUser")
     public int updateUser(BdUser bdUser) {
         return userService.updateUser(bdUser);
     }
+
+    /**
+     * 新增用户、用户与设备绑定关系数据
+     *
+     * @param userDeviceBean
+     * @return
+     */
+    @PostMapping(value = "createUserAndDevice")
+    @ApiOperation(value = "创建用户、用户与设备信息")
+    public int createUserAndDevice(@RequestBody UserDeviceBean userDeviceBean) {
+        return userService.createUserAndDevice(userDeviceBean);
+    }
+
 }

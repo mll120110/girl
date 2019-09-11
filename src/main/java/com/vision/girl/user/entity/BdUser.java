@@ -1,5 +1,7 @@
 package com.vision.girl.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.vision.girl.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,11 +26,12 @@ public class BdUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户主键")
+    @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
 
     @ApiModelProperty(value = "用户name")
     private String userName;
 
-    @ApiModelProperty(value = "用户状态")
+    @ApiModelProperty(value = "用户状态0无效，1有效")
     private Integer state;
 }

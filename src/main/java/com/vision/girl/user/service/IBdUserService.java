@@ -2,6 +2,7 @@ package com.vision.girl.user.service;
 
 import com.vision.girl.user.entity.BdUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vision.girl.user.entity.UserDeviceBean;
 
 /**
  * <p>
@@ -20,5 +21,19 @@ public interface IBdUserService extends IService<BdUser> {
      */
     int createUser(BdUser bdUser);
 
+    /**
+     * 更新用户信息
+     *
+     * @param bdUser
+     * @return
+     */
     int updateUser(BdUser bdUser);
+
+    /**
+     * 新增用户、用户与设备绑定关系数据
+     *
+     * @param userDeviceBean
+     * @return
+     */
+    int createUserAndDevice(UserDeviceBean userDeviceBean);
 }

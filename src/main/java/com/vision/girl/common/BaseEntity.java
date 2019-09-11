@@ -25,7 +25,4 @@ public class BaseEntity {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "乐观锁")
-    private Integer version;
 }

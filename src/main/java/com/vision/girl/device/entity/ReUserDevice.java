@@ -20,13 +20,19 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="ReUserDevice对象", description="")
+@ApiModel(value = "ReUserDevice对象", description = "")
 public class ReUserDevice extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户与设备关系id")
     private String userDeviceId;
+
+    @ApiModelProperty(value = "用户id")
+    private String userId;
+
+    @ApiModelProperty(value = "设备id")
+    private String deviceId;
 
     @ApiModelProperty(value = "状态")
     private Integer state;
@@ -36,6 +42,5 @@ public class ReUserDevice extends BaseEntity {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
-
 
 }
