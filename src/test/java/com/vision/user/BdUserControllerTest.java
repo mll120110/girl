@@ -38,7 +38,7 @@ public class BdUserControllerTest {
     }
 
     /**
-     * 新增用户
+     * 新增用户,使用该方式暂无调试成功
      * 
      * @throws Exception
      */
@@ -49,5 +49,19 @@ public class BdUserControllerTest {
         mvc.perform(MockMvcRequestBuilders.post("/user/bd-user/createUser").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(userBeanJson)).andExpect(MockMvcResultMatchers.status().isOk())
             .andDo(MockMvcResultHandlers.print());
+    }
+
+    /**
+     * 查询用户
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void getUser() throws Exception {
+        String userId = "";
+        mvc.perform(
+            MockMvcRequestBuilders.get("/user/bd-user/getUser").param("userId", "7ef4b34c-4bea-4dd3-b367-e3da33fc6bb6")
+                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
     }
 }

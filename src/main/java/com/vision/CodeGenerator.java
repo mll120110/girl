@@ -91,7 +91,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/com/vision/girl/mapper/" + pc.getModuleName() + "/"
+                return projectPath + "/src/main/java/com/vision/girl/" + pc.getModuleName() + "/mapper/"
                     + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
@@ -119,14 +119,13 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);
         // 公共父类
         strategy.setSuperControllerClass("com.vision.girl.common.BaseController");
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
+        // 写于父类中的公共字段,在生成实体类时，不会生成下述字段
+        strategy.setSuperEntityColumns("id", "update_time", "create_time");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
-
     }
 }

@@ -1,5 +1,6 @@
 package com.vision.girl.device.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.vision.girl.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,10 +29,12 @@ public class ReUserDevice extends BaseEntity {
     @ApiModelProperty(value = "用户与设备关系id")
     private String userDeviceId;
 
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户表外键id")
+    @TableField(value = "user_id")
     private String userId;
 
-    @ApiModelProperty(value = "设备id")
+    @ApiModelProperty(value = "设备表外键id")
+    @TableField(value = "device_id")
     private String deviceId;
 
     @ApiModelProperty(value = "状态")

@@ -13,3 +13,7 @@ spring:
   #关闭启动banner
   main:
     banner-mode: "off"
+
+logging:
+  level:
+    com.vision.girl: debug

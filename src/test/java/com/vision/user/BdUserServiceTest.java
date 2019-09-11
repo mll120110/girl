@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,6 +22,10 @@ import java.util.UUID;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
+/**
+ * 带事务注解单元测试不增加冗余数据
+ */
+@Transactional
 public class BdUserServiceTest {
     @Autowired
     IBdUserService iBdUserService;
@@ -71,5 +76,15 @@ public class BdUserServiceTest {
         // 状态0无效，1有效
         userDeviceBean.setState(1);
         iBdUserService.createUserAndDevice(userDeviceBean);
+    }
+
+    @Test
+    public void getUser() throws Exception {
+        iBdUserService.getUser("7ef4b34c-4bea-4dd3-b367-e3da33fc6bb6");
+    }
+
+    @Test
+    public void getUserList() throws Exception {
+        iBdUserService.getUserList(0, 10);
     }
 }

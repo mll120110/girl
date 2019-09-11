@@ -1,5 +1,8 @@
 package com.vision.girl.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vision.girl.device.entity.ReUserDevice;
 import com.vision.girl.device.mapper.ReUserDeviceMapper;
@@ -84,5 +87,34 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
         reUserDevice.setUpdateTime(LocalDateTime.now());
         int userDeviceResult = reUserDeviceMapper.insert(reUserDevice);
         return userResult + userDeviceResult;
+    }
+
+    /**
+     * 获取用户信息
+     * 
+     * @param userId
+     * @return
+     */
+    @Override
+    public BdUser getUser(String userId) {
+        QueryWrapper<BdUser> entityWrapper = new QueryWrapper<>();
+        entityWrapper.eq("user_id", userId);
+        entityWrapper.eq("state", 1);
+        return bdUserMapper.selectOne(entityWrapper);
+    }
+
+    /**
+     * 获取用户列表信息
+     * 
+     * @param startPage
+     * @param endPage
+     * @return
+     */
+    @Override
+    public IPage<BdUser> getUserList(int startPage, int endPage) {
+        Page<BdUser> page = new Page<>(startPage, endPage);
+        QueryWrapper<BdUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("state", 1);
+        return bdUserMapper.selectPage(page, queryWrapper);
     }
 }

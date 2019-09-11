@@ -1,5 +1,6 @@
 package com.vision.girl.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.vision.girl.user.entity.BdUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.vision.girl.user.entity.UserDeviceBean;
@@ -36,4 +37,21 @@ public interface IBdUserService extends IService<BdUser> {
      * @return
      */
     int createUserAndDevice(UserDeviceBean userDeviceBean);
+
+    /**
+     * 获取用户信息
+     * 
+     * @param userId
+     * @return
+     */
+    BdUser getUser(String userId);
+
+    /**
+     * 获取用户列表信息
+     * 
+     * @param startPage
+     * @param endPage
+     * @return
+     */
+    IPage<BdUser> getUserList(int startPage, int endPage);
 }

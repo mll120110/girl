@@ -1,5 +1,6 @@
 package com.vision.girl.user.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.vision.girl.common.BaseController;
 import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
@@ -60,4 +61,28 @@ public class BdUserController extends BaseController {
         return userService.createUserAndDevice(userDeviceBean);
     }
 
+    /**
+     * 获取用户信息
+     * 
+     * @param userId
+     * @return
+     */
+    @GetMapping(value = "getUser")
+    @ApiModelProperty(value = "获取用户信息")
+    public BdUser getUser(@RequestParam String userId) {
+        return userService.getUser(userId);
+    }
+
+    /**
+     * 分页获取用户列表信息
+     * 
+     * @param startPage
+     * @param endPage
+     * @return
+     */
+    @GetMapping(value = "getUserList")
+    @ApiModelProperty(value = "获取用户信息列表")
+    public IPage<BdUser> getUserList(@RequestParam int startPage, @RequestParam int endPage) {
+        return userService.getUserList(startPage, endPage);
+    }
 }
