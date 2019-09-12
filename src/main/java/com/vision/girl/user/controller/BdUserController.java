@@ -9,7 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user/bd-user")
 public class BdUserController extends BaseController {
     @Autowired
+    @Qualifier("bdUserServiceImpl")
     IBdUserService userService;
 
     /**
@@ -84,5 +88,17 @@ public class BdUserController extends BaseController {
     @ApiModelProperty(value = "获取用户信息列表")
     public IPage<BdUser> getUserList(@RequestParam int startPage, @RequestParam int endPage) {
         return userService.getUserList(startPage, endPage);
+    }
+
+    @GetMapping(value = "getUserInfo")
+    @ApiModelProperty(value = "获取一条用户信息")
+    public BdUser getUserInfo() {
+        return userService.getUserInfo();
+    }
+
+    @GetMapping(value = "getUserInfoTwo")
+    @ApiModelProperty(value = "获取二条用户信息")
+    public List<BdUser> getUserInfoTwo() {
+        return userService.getUserInfoTwo();
     }
 }

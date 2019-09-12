@@ -1,9 +1,11 @@
 package com.vision.girl.user.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.vision.girl.user.entity.BdUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
+
+import java.util.List;
 
 /**
  * <p>
@@ -54,4 +56,13 @@ public interface IBdUserService extends IService<BdUser> {
      * @return
      */
     IPage<BdUser> getUserList(int startPage, int endPage);
+
+    /**
+     * getUserInfo
+     * 
+     * @return
+     */
+    BdUser getUserInfo();
+
+    List<BdUser> getUserInfoTwo();
 }

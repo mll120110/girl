@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author Jack Road
  * @since 2019-08-29
  */
-@Service
+@Service(value = "reUserDeviceServiceImpl")
 public class ReUserDeviceServiceImpl extends ServiceImpl<ReUserDeviceMapper, ReUserDevice> implements IReUserDeviceService {
 
 }

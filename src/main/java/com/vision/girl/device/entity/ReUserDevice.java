@@ -1,6 +1,8 @@
 package com.vision.girl.device.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.vision.girl.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,6 +29,7 @@ public class ReUserDevice extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户与设备关系id")
+    @TableId(type = IdType.NONE)
     private String userDeviceId;
 
     @ApiModelProperty(value = "用户表外键id")

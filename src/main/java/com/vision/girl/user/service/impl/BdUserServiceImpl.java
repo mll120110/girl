@@ -12,10 +12,12 @@ import com.vision.girl.user.mapper.BdUserMapper;
 import com.vision.girl.user.service.IBdUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -34,6 +36,7 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
     BdUserMapper bdUserMapper;
 
     @Autowired
+    @Qualifier("reUserDeviceMapper")
     ReUserDeviceMapper reUserDeviceMapper;
 
     /**
@@ -116,5 +119,15 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
         QueryWrapper<BdUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("state", 1);
         return bdUserMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public BdUser getUserInfo() {
+        return bdUserMapper.getUserInfo();
+    }
+
+    @Override
+    public List<BdUser> getUserInfoTwo() {
+        return bdUserMapper.getUserInfoTwo();
     }
 }

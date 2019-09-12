@@ -1,7 +1,7 @@
 package com.vision.girl.device.mapper;
 
-import com.vision.girl.device.entity.ReUserDevice;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.vision.girl.device.entity.ReUserDevice;
 
 /**
  * <p>
