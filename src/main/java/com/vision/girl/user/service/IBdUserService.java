@@ -65,4 +65,11 @@ public interface IBdUserService extends IService<BdUser> {
     BdUser getUserInfo();
 
     List<BdUser> getUserInfoTwo();
+
+    /**
+     * 根据关联关系获取用户与设备的信息
+     * 
+     * @return
+     */
+    List<BdUser> getUserBeanList();
 }

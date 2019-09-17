@@ -130,4 +130,11 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
     public List<BdUser> getUserInfoTwo() {
         return bdUserMapper.getUserInfoTwo();
     }
+
+    @Override
+    public List<BdUser> getUserBeanList() {
+        // 1.根据用户信息关联关系表，关系表中关联设备信息
+
+        return null;
+    }
 }

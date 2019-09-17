@@ -31,7 +31,7 @@ public class BdUserController extends BaseController {
     IBdUserService userService;
 
     /**
-     * 新增用户
+     * 新增用户，使用Mybatis-plus自带组件新增一条记录
      *
      * @param bdUser
      * @return
@@ -43,7 +43,7 @@ public class BdUserController extends BaseController {
     }
 
     /**
-     * 更新用户信息
+     * 更新用户信息，用Mybatis-plus自带组件Update一条记录
      * 
      * @param bdUser
      * @return
@@ -54,7 +54,7 @@ public class BdUserController extends BaseController {
     }
 
     /**
-     * 新增用户、用户与设备绑定关系数据
+     * 新增用户、用户与设备绑定关系数据，使用Spring事务注解完成多表数据操作
      *
      * @param userDeviceBean
      * @return
@@ -66,7 +66,7 @@ public class BdUserController extends BaseController {
     }
 
     /**
-     * 获取用户信息
+     * 获取用户信息，使用Mybatis-plus组件有条件的查询一条记录
      * 
      * @param userId
      * @return
@@ -78,7 +78,7 @@ public class BdUserController extends BaseController {
     }
 
     /**
-     * 分页获取用户列表信息
+     * 分页获取用户列表信息，使用Mybatis-plus组件使用分页
      * 
      * @param startPage
      * @param endPage
@@ -90,15 +90,42 @@ public class BdUserController extends BaseController {
         return userService.getUserList(startPage, endPage);
     }
 
+    /**
+     * 获取一条用户信息，使用@Select注解写SQL获取信息
+     * 
+     * @return
+     */
     @GetMapping(value = "getUserInfo")
     @ApiModelProperty(value = "获取一条用户信息")
     public BdUser getUserInfo() {
         return userService.getUserInfo();
     }
 
+    /**
+     * 获取二条用户信息,使用XML配置方式编写SQL获取信息
+     * 
+     * @return
+     */
     @GetMapping(value = "getUserInfoTwo")
     @ApiModelProperty(value = "获取二条用户信息")
     public List<BdUser> getUserInfoTwo() {
         return userService.getUserInfoTwo();
+    }
+
+    /**
+     * 根据关联关系获取用户与设备的信息，一个用户绑定多个设备的场景进行逻辑编写获取查询信息
+     * 
+     * @return
+     */
+    @GetMapping(value = "getUserBeanList")
+    @ApiModelProperty(value = "根据关联关系获取用户与设备的信息")
+    public List<BdUser> getUserBeanList() {
+        return userService.getUserBeanList();
+    }
+
+    @DeleteMapping(value = "")
+
+    public void test(){
+
     }
 }
