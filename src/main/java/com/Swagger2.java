@@ -37,7 +37,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("girl")
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.vision"))
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/")
