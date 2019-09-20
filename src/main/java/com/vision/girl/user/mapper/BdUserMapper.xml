@@ -4,4 +4,22 @@
     <select id="getUserInfoTwo" resultType="com.vision.girl.user.entity.BdUser">
         select * from bd_user where 1=1 limit 0,2
     </select>
+
+    <select id="getUserBeanListqweqweqweqweqw" resultType="com.vision.girl.user.entity.BdUser">
+        SELECT
+            bu.user_id,
+            bu.user_name,
+            bu.state,
+            bd.device_id,
+            bd.device_name,
+            bd.device_number,
+            bd.state as device_state
+        FROM
+            re_user_device rud
+            JOIN bd_user bu ON rud.user_id = bu.user_id
+            JOIN bd_device bd ON rud.device_id = bd.device_id
+        WHERE
+            rud.user_id = #{userId}
+            AND rud.state = 1
+    </select>
 </mapper>

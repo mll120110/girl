@@ -1,7 +1,7 @@
 package com.vision.girl.user.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.vision.girl.common.BaseController;
+import com.vision.girl.common.ResultBean;
 import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
 import com.vision.girl.user.service.IBdUserService;
@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -38,8 +36,9 @@ public class BdUserController extends BaseController {
      */
     @PostMapping(value = "createUser")
     @ApiModelProperty(value = "创建用户信息")
-    public int createUser(@RequestBody BdUser bdUser) {
-        return userService.createUser(bdUser);
+    public ResultBean createUser(@RequestBody BdUser bdUser) {
+        userService.createUser(bdUser);
+        return ResultBean.success();
     }
 
     /**
@@ -49,20 +48,34 @@ public class BdUserController extends BaseController {
      * @return
      */
     @PostMapping(value = "updateUser")
-    public int updateUser(BdUser bdUser) {
-        return userService.updateUser(bdUser);
+    public ResultBean updateUser(BdUser bdUser) {
+        userService.updateUser(bdUser);
+        return ResultBean.success();
     }
 
     /**
-     * 新增用户、用户与设备绑定关系数据，使用Spring事务注解完成多表数据操作
+     * 新增用户、用户与设备绑定关系数据（单条用户、单条设备关系），使用Spring事务注解完成多表数据操作
      *
      * @param userDeviceBean
      * @return
      */
     @PostMapping(value = "createUserAndDevice")
     @ApiOperation(value = "创建用户、用户与设备信息")
-    public int createUserAndDevice(@RequestBody UserDeviceBean userDeviceBean) {
-        return userService.createUserAndDevice(userDeviceBean);
+    public ResultBean createUserAndDevice(@RequestBody UserDeviceBean userDeviceBean) {
+        userService.createUserAndDevice(userDeviceBean);
+        return ResultBean.success();
+    }
+
+    /**
+     * 新增用户、用户与设备绑定关系数据（单条用户、多个设备关系），使用Spring事务注解完成多表数据操作
+     * 
+     * @param userDeviceBean
+     * @return
+     */
+    @PostMapping(value = "createUserAndDevicesList")
+    @ApiModelProperty(value = "创建单用户与多设备信息")
+    public ResultBean createUserAndDevicesList(@RequestBody UserDeviceBean userDeviceBean) {
+        return ResultBean.success();
     }
 
     /**
@@ -73,8 +86,8 @@ public class BdUserController extends BaseController {
      */
     @GetMapping(value = "getUser")
     @ApiModelProperty(value = "获取用户信息")
-    public BdUser getUser(@RequestParam String userId) {
-        return userService.getUser(userId);
+    public ResultBean getUser(@RequestParam String userId) {
+        return ResultBean.success(userService.getUser(userId));
     }
 
     /**
@@ -86,8 +99,8 @@ public class BdUserController extends BaseController {
      */
     @GetMapping(value = "getUserList")
     @ApiModelProperty(value = "获取用户信息列表")
-    public IPage<BdUser> getUserList(@RequestParam int startPage, @RequestParam int endPage) {
-        return userService.getUserList(startPage, endPage);
+    public ResultBean getUserList(@RequestParam int startPage, @RequestParam int endPage) {
+        return ResultBean.success(userService.getUserList(startPage, endPage));
     }
 
     /**
@@ -97,8 +110,8 @@ public class BdUserController extends BaseController {
      */
     @GetMapping(value = "getUserInfo")
     @ApiModelProperty(value = "获取一条用户信息")
-    public BdUser getUserInfo() {
-        return userService.getUserInfo();
+    public ResultBean getUserInfo() {
+        return ResultBean.success(userService.getUserInfo());
     }
 
     /**
@@ -108,8 +121,8 @@ public class BdUserController extends BaseController {
      */
     @GetMapping(value = "getUserInfoTwo")
     @ApiModelProperty(value = "获取二条用户信息")
-    public List<BdUser> getUserInfoTwo() {
-        return userService.getUserInfoTwo();
+    public ResultBean getUserInfoTwo() {
+        return ResultBean.success(userService.getUserInfoTwo());
     }
 
     /**
@@ -119,13 +132,7 @@ public class BdUserController extends BaseController {
      */
     @GetMapping(value = "getUserBeanList")
     @ApiModelProperty(value = "根据关联关系获取用户与设备的信息")
-    public List<BdUser> getUserBeanList() {
-        return userService.getUserBeanList();
-    }
-
-    @DeleteMapping(value = "")
-
-    public void test(){
-
+    public ResultBean getUserBeanList(String userId) {
+        return ResultBean.success(userService.getUserBeanList(userId));
     }
 }

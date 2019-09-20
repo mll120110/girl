@@ -71,5 +71,5 @@ public interface IBdUserService extends IService<BdUser> {
      * 
      * @return
      */
-    List<BdUser> getUserBeanList();
+    List<BdUser> getUserBeanList(String userId);
 }

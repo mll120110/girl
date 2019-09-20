@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author Jack Road
@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBdDeviceService extends IService<BdDevice> {
 
+    /**
+     * 创建设备信息
+     *
+     * @param bdDevice
+     * @return
+     */
+    int createDevice(BdDevice bdDevice);
 }

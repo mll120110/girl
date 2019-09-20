@@ -132,9 +132,8 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
     }
 
     @Override
-    public List<BdUser> getUserBeanList() {
-        // 1.根据用户信息关联关系表，关系表中关联设备信息
-
-        return null;
+    public List<BdUser> getUserBeanList(String userId) {
+        // 1.根据用户信息关联关系表，关系表中关联设备信息，实际上是以关系表为主，去关联用户与设备
+        return bdUserMapper.getUserBeanList(userId);
     }
 }

@@ -64,4 +64,17 @@ public class BdUserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
     }
+
+    /**
+     * 根据关联关系获取用户与设备的信息，一个用户绑定多个设备的场景进行逻辑编写获取查询信息
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void getUserBeanList() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/user/bd-user/getUserBeanList")
+            .param("userId", "e7ee86ca-23f3-478c-9d38-3d2a1083c236").contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print()).andReturn();
+    }
 }
