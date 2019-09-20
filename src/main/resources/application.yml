@@ -21,4 +21,3 @@ mybatis-plus:
   global-config:
     banner: false
   check-config-location: true
-  #mapper-locations: classpath:com/vision/girl/*/mapper/*Mapper.xml
