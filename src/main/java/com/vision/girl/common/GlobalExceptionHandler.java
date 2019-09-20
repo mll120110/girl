@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.sql.SQLException;
 
 /**
- * 全局异常处理类
+ * 全局异常处理类，可以根据实际情况进行拓展
  * 
  * @author Jack Road
  * @since 2019-09-20
  */
 
-/**
- * 该注解可以捕获Controller层的异常信息，并捕获处理
- */
+// 该注解可以捕获Controller层的异常信息，并捕获处理
 @ControllerAdvice
 @ResponseBody
 @Slf4j
@@ -26,24 +24,71 @@ public class GlobalExceptionHandler {
      * SQL异常sqlExceptio
      * 
      * @param e
-     * @return
+     * @return ResultBean
      */
     @ExceptionHandler
     public ResultBean sqlException(SQLException e) {
         log.error("SQL异常", e);
-        return ResultBean.error(500, "SQL异常");
+        return ResultBean.error(500, "SQL异常" + e);
     }
 
     /**
-     * 系统内部异常
+     * 空指针异常
      * 
      * @param e
-     * @return
+     * @return ResultBean
      */
     @ExceptionHandler
-    public ResultBean Exception(Exception e) {
-        log.error("系统内部异常", e);
-        return ResultBean.error(500, "系统内部异常" + e);
+    public ResultBean nullPointerException(NullPointerException e) {
+        log.info("空指针异常", e);
+        return ResultBean.error(500, "空指针异常" + e);
     }
 
+    /**
+     * 类型强制转换异常
+     * 
+     * @param e
+     * @return ResultBean
+     */
+    @ExceptionHandler
+    public ResultBean classCastException(ClassCastException e) {
+        log.info("类型强制转换异常", e);
+        return ResultBean.error(500, "类型强制转换异常" + e);
+    }
+
+    /**
+     * 字符串转换为数字异常
+     * 
+     * @param e
+     * @return ResultBean
+     */
+    @ExceptionHandler
+    public ResultBean numberFormatException(NumberFormatException e) {
+        log.info("字符串转换为数字异常", e);
+        return ResultBean.error(500, "字符串转换为数字异常" + e);
+    }
+
+    /**
+     * 方法未找到异常
+     * 
+     * @param e
+     * @return ResultBean
+     */
+    @ExceptionHandler
+    public ResultBean noSuchMethodException(NoSuchMethodException e) {
+        log.error("方法未找到异常", e);
+        return ResultBean.error(500, "方法未找到异常" + e);
+    }
+
+    /**
+     * 非法参数异常
+     * 
+     * @param e
+     * @return ResultBean
+     */
+    @ExceptionHandler
+    public ResultBean illegalArgumentException(IllegalArgumentException e) {
+        log.error("非法参数异常", e);
+        return ResultBean.error(500, "非法参数异常" + e);
+    }
 }
