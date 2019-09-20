@@ -1,16 +1,18 @@
 package com.vision.girl.user.controller;
 
-import com.vision.girl.common.BaseController;
-import com.vision.girl.user.entity.BdDevice;
-import com.vision.girl.user.service.IBdDeviceService;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vision.girl.common.BaseController;
+import com.vision.girl.user.entity.BdDevice;
+import com.vision.girl.user.service.IBdDeviceService;
+
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -36,7 +38,7 @@ public class BdDeviceController extends BaseController {
      * @return
      */
     @PostMapping(value = "createDevice")
-    @ApiModelProperty(value = "创建设备信息")
+    @ApiOperation(value = "创建设备信息")
     public int createDevice(@RequestBody BdDevice bdDevice) {
         return deviceService.createDevice(bdDevice);
     }

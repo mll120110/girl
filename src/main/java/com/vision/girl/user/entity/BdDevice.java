@@ -24,15 +24,15 @@ public class BdDevice extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "device_id", type = IdType.UUID)
-    @ApiModelProperty(value = "设备id")
+    @ApiModelProperty(value = "设备id", required = true)
     private String deviceId;
 
-    @ApiModelProperty(value = "设备name")
+    @ApiModelProperty(value = "设备name", required = true)
     private String deviceName;
 
-    @ApiModelProperty(value = "设备号")
+    @ApiModelProperty(value = "设备号", required = true)
     private Long deviceNumber;
 
-    @ApiModelProperty(value = "设备状态0无效，1有效")
+    @ApiModelProperty(value = "设备状态0无效，1有效", required = true)
     private Integer state;
 }

@@ -5,7 +5,6 @@ import com.vision.girl.common.ResultBean;
 import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
 import com.vision.girl.user.service.IBdUserService;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @PostMapping(value = "createUser")
-    @ApiModelProperty(value = "创建用户信息")
+    @ApiOperation(value = "创建用户信息")
     public ResultBean createUser(@RequestBody BdUser bdUser) {
         userService.createUser(bdUser);
         return ResultBean.success();
@@ -47,7 +46,8 @@ public class BdUserController extends BaseController {
      * @param bdUser
      * @return
      */
-    @PostMapping(value = "updateUser")
+    @PutMapping(value = "updateUser")
+    @ApiOperation(value = "更新用户信息")
     public ResultBean updateUser(BdUser bdUser) {
         userService.updateUser(bdUser);
         return ResultBean.success();
@@ -73,7 +73,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @PostMapping(value = "createUserAndDevicesList")
-    @ApiModelProperty(value = "创建单用户与多设备信息")
+    @ApiOperation(value = "创建单用户与多设备信息")
     public ResultBean createUserAndDevicesList(@RequestBody UserDeviceBean userDeviceBean) {
         return ResultBean.success();
     }
@@ -85,7 +85,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "getUser")
-    @ApiModelProperty(value = "获取用户信息")
+    @ApiOperation(value = "获取用户信息")
     public ResultBean getUser(@RequestParam String userId) {
         return ResultBean.success(userService.getUser(userId));
     }
@@ -98,7 +98,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "getUserList")
-    @ApiModelProperty(value = "获取用户信息列表")
+    @ApiOperation(value = "获取用户信息列表")
     public ResultBean getUserList(@RequestParam int startPage, @RequestParam int endPage) {
         return ResultBean.success(userService.getUserList(startPage, endPage));
     }
@@ -109,7 +109,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "getUserInfo")
-    @ApiModelProperty(value = "获取一条用户信息")
+    @ApiOperation(value = "获取一条用户信息")
     public ResultBean getUserInfo() {
         return ResultBean.success(userService.getUserInfo());
     }
@@ -120,7 +120,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "getUserInfoTwo")
-    @ApiModelProperty(value = "获取二条用户信息")
+    @ApiOperation(value = "获取二条用户信息")
     public ResultBean getUserInfoTwo() {
         return ResultBean.success(userService.getUserInfoTwo());
     }
@@ -131,7 +131,7 @@ public class BdUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "getUserBeanList")
-    @ApiModelProperty(value = "根据关联关系获取用户与设备的信息")
+    @ApiOperation(value = "根据关联关系获取用户与设备的信息")
     public ResultBean getUserBeanList(String userId) {
         return ResultBean.success(userService.getUserBeanList(userId));
     }

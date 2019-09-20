@@ -25,14 +25,14 @@ public class BdUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户主键")
+    @ApiModelProperty(value = "用户主键", required = true)
     @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
 
-    @ApiModelProperty(value = "用户name")
+    @ApiModelProperty(value = "用户name", required = true)
     private String userName;
 
-    @ApiModelProperty(value = "用户状态0无效，1有效")
+    @ApiModelProperty(value = "用户状态0无效，1有效", required = true)
     private Integer state;
 
     /**
@@ -44,6 +44,7 @@ public class BdUser extends BaseEntity {
      *
      * 3.Java Bean中的数据类型与数据库设计的字段类型保持一致；
      */
+
     private String deviceId;
     private String deviceName;
     private Long deviceNumber;
