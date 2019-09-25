@@ -1,5 +1,6 @@
 package com.vision;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -55,6 +56,8 @@ public class CodeGenerator {
         gc.setOpen(false);
         // 实体属性 Swagger2 注解
         gc.setSwagger2(true);
+        // 主键生成类型
+        gc.setIdType(IdType.UUID);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -124,6 +127,7 @@ public class CodeGenerator {
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setEntitySerialVersionUID(true);
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
