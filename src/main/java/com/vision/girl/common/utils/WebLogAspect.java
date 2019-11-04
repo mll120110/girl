@@ -1,13 +1,12 @@
 package com.vision.girl.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Web请求API，请求参数，及返回参数打印日志
+ *
+ * @author Jack_Road
+ * @date 2019/11/01 11:06
+ */
+@Slf4j
 @Aspect
 @Component
 public class WebLogAspect {
-    private static Logger log = LoggerFactory.getLogger(WebLogAspect.class);
     private final ObjectMapper mapper;
 
     @Autowired
@@ -28,6 +33,8 @@ public class WebLogAspect {
 
     /**
      * 配置多个过滤项
+     * 
+     * 捕获controller层使用相关类型请求协议类型
      */
     @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping) ||"
         + " @annotation(org.springframework.web.bind.annotation.PostMapping) || "
