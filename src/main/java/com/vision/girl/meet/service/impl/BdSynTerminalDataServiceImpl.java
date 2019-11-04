@@ -23,7 +23,7 @@ import java.util.UUID;
  * @author Jack Road
  * @since 2019-09-23
  */
-@Service
+@Service("bdSynTerminalDataServiceImpl")
 public class BdSynTerminalDataServiceImpl extends ServiceImpl<BdSynTerminalDataMapper, BdSynTerminalData>
     implements IBdSynTerminalDataService {
 

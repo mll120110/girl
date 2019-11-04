@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BdSynTerminalDataController extends BaseController {
 
     @Autowired
-    @Qualifier("iBdSynTerminalDataService")
+    @Qualifier("bdSynTerminalDataServiceImpl")
     IBdSynTerminalDataService iBdSynTerminalDataService;
 
     /**
