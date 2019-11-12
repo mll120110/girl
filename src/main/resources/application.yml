@@ -6,9 +6,9 @@ content: "cupSize: ${cupSize},age: ${age}"
 spring:
   #数据库配置
   datasource:
-    url: jdbc:mysql://10.1.7.126:3306/spring_boot?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&nullNamePatternMatchesAll=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://45.33.47.39:3306/spring_boot?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&nullNamePatternMatchesAll=true
+    username: jackroad
+    password: jackroad564312
     driver-class-name: com.mysql.cj.jdbc.Driver
   #关闭启动banner
   main:
