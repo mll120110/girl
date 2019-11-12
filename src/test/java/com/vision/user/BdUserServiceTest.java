@@ -4,14 +4,18 @@ import com.vision.girl.user.entity.BdDevice;
 import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
 import com.vision.girl.user.service.IBdUserService;
+import com.vision.girl.user.vo.UserDeviceVO;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -24,7 +28,7 @@ import java.util.UUID;
 /**
  * 带事务注解单元测试不增加冗余数据
  */
-// @Transactional
+@Transactional
 public class BdUserServiceTest {
     @Autowired
     IBdUserService iBdUserService;
@@ -89,6 +93,10 @@ public class BdUserServiceTest {
 
     @Test
     public void getUserBeanList() throws Exception {
-        iBdUserService.getUserBeanList("e7ee86ca-23f3-478c-9d38-3d2a1083c236");
+        List<UserDeviceVO> userBeanList = iBdUserService.getUserBeanList("e7ee86ca-23f3-478c-9d38-3d2a1083c236");
+        Assert.assertNotNull(userBeanList);
+        for (UserDeviceVO userDeviceVO : userBeanList) {
+            log.debug(userDeviceVO.toString());
+        }
     }
 }

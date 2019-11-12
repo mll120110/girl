@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
+import com.vision.girl.user.vo.UserDeviceVO;
 
 import java.util.List;
 
@@ -71,5 +72,5 @@ public interface IBdUserService extends IService<BdUser> {
      * 
      * @return
      */
-    List<BdUser> getUserBeanList(String userId);
+    List<UserDeviceVO> getUserBeanList(String userId);
 }

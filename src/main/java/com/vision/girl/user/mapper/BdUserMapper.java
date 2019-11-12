@@ -2,6 +2,7 @@ package com.vision.girl.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.vision.girl.user.entity.BdUser;
+import com.vision.girl.user.vo.UserDeviceVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -37,5 +38,5 @@ public interface BdUserMapper extends BaseMapper<BdUser> {
             "WHERE " +
             "rud.user_id = #{userId} " +
             "AND rud.state = 1")
-    List<BdUser> getUserBeanList(@Param("userId") String userId);
+    List<UserDeviceVO> getUserBeanList(@Param("userId") String userId);
 }

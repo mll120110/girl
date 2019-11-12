@@ -10,6 +10,7 @@ import com.vision.girl.user.entity.BdUser;
 import com.vision.girl.user.entity.UserDeviceBean;
 import com.vision.girl.user.mapper.BdUserMapper;
 import com.vision.girl.user.service.IBdUserService;
+import com.vision.girl.user.vo.UserDeviceVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -132,7 +133,7 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
     }
 
     @Override
-    public List<BdUser> getUserBeanList(String userId) {
+    public List<UserDeviceVO> getUserBeanList(String userId) {
         // 1.根据用户信息关联关系表，关系表中关联设备信息，实际上是以关系表为主，去关联用户与设备
         return bdUserMapper.getUserBeanList(userId);
     }
