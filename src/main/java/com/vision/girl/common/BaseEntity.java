@@ -16,16 +16,16 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "BaseEntity对象", description = "")
+@ApiModel(value = "BaseEntity对象", description = "基础实体类，共用相关字段")
 public class BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "创建时间", required = true)
+    @ApiModelProperty(value = "创建时间", required = true, example = "2020-11-11 20:20:20")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "更新时间", required = true)
+    @ApiModelProperty(value = "更新时间", required = true, example = "2020-11-11 20:20:20")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 }

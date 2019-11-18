@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * 会议模块
  * 
@@ -27,7 +29,7 @@ public class MeetingController {
 
     @PostMapping(value = "starMeeting")
     @ApiOperation(value = "开始会议")
-    public ResultBean startMeeting(@RequestBody MeetBean meetBean) {
+    public ResultBean startMeeting(@Valid @RequestBody MeetBean meetBean) {
         return meetingService.startMeeting(meetBean);
     }
 
