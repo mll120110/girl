@@ -13,7 +13,16 @@ spring:
   #关闭启动banner
   main:
     banner-mode: "off"
-
+  redis:
+    host: 45.33.47.39
+    port: 6379
+    password: 564312mllMll.
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
 logging:
   level:
     com.vision.girl: debug
