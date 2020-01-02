@@ -27,7 +27,7 @@ public class ConsistentHashingWithoutVirtualNode {
     static {
         for (int i = 0; i < servers.length; i++) {
             int hash = getHash(servers[i]);
-            System.out.println("[" + servers[i] + "]加入集合中, 其Hash值为" + hash);
+            System.out.println("[" + servers[i] + "]加入集合中, 其Hash值为" + hash + ",hash长度" + String.valueOf(hash).length());
             sortedMap.put(hash, servers[i]);
         }
         System.out.println();
@@ -69,8 +69,9 @@ public class ConsistentHashingWithoutVirtualNode {
 
     public static void main(String[] args) {
         String[] nodes = {"127.0.0.1:1111", "221.226.0.1:2222", "10.211.0.1:3333"};
-        for (int i = 0; i < nodes.length; i++)
-            System.out
-                .println("[" + nodes[i] + "]的hash值为" + getHash(nodes[i]) + ", 被路由到结点[" + getServer(nodes[i]) + "]");
+        for (int i = 0; i < nodes.length; i++) {
+            System.out.println("[" + nodes[i] + "]的hash值为" + getHash(nodes[i]) + ", 被路由到结点[" + getServer(nodes[i]) + "]"
+                + "hash长度" + String.valueOf(getHash(nodes[i])).length());
+        }
     }
 }

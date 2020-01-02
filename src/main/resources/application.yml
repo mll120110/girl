@@ -17,12 +17,18 @@ spring:
     host: 45.33.47.39
     port: 6379
     password: 564312mllMll.
+    database: 0
     jedis:
       pool:
+        #连接池最大连接数
         max-active: 8
+        #连接池最大阻塞等待时间
         max-wait: 1
+        #连接池最大空闲链接
         max-idle: 8
+        #连接池最小空闲链接
         min-idle: 0
+    timeout: 6000
 logging:
   level:
     com.vision.girl: debug
