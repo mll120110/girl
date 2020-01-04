@@ -6,6 +6,7 @@ import com.vision.girl.meet.service.MeetingService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import javax.validation.Valid;
 public class MeetingController {
 
     @Autowired
+    @Qualifier(value = "circumMeetingServiceImpl")
     MeetingService meetingService;
 
     @PostMapping(value = "starMeeting")
@@ -49,5 +51,18 @@ public class MeetingController {
     @ApiOperation(value = "停止会议")
     public ResultBean stopMeeting(@RequestBody MeetBean meetBean) {
         return null;
+    }
+
+    public enum chooseMeetingType {
+        Normal(1, "normal");
+
+        private int code;
+
+        private String name;
+
+        chooseMeetingType(int code, String name) {
+            this.code = code;
+            this.name = name;
+        }
     }
 }
