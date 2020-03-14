@@ -26,7 +26,7 @@ import javax.validation.Valid;
 public class MeetingController {
 
     @Autowired
-    @Qualifier(value = "circumMeetingServiceImpl")
+    @Qualifier(value = "meetingServiceImpl")
     MeetingService meetingService;
 
     @PostMapping(value = "starMeeting")
