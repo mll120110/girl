@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -24,31 +24,41 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @Slf4j
 @SpringBootTest
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class BdUserControllerTest {
     @Autowired
-    private WebApplicationContext wac;
+    private WebApplicationContext webApplicationContext;
 
-    private MockMvc mvc;
-    private MockHttpSession session;
+    private MockMvc mockMvc;
+
+    private MockHttpSession mockHttpSession;
 
     @Before
     public void setupMockMvc() {
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     /**
-     * 新增用户,使用该方式暂无调试成功
+     * 新增用户
      * 
      * @throws Exception
      */
     @Test
     public void createUser() throws Exception {
-        String userBeanJson = "{" + "\"userId\":\"\"," + "\"userName\":\"Jack Road Mvc\"," + "\"state\":\"1\","
-            + "\"createTime\":\"2019-09-11 11:11:11\"," + "\"updateTime\":\"2019-09-11 11:11:11\"" + "}";
-        mvc.perform(MockMvcRequestBuilders.post("/user/bd-user/createUser").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(userBeanJson)).andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(MockMvcResultHandlers.print());
+        String userBeanJson = "{\n" +
+                "  \"userId\": \"\",\n" +
+                "  \"userAccount\": \"admin\",\n" +
+                "  \"userName\": \"Jack Road Mvc\",\n" +
+                "  \"state\": \"1\",\n" +
+                "  \"createTime\": \"2019-09-11 11:11:11\",\n" +
+                "  \"updateTime\": \"2019-09-11 11:11:11\"\n" +
+                "}";
+        log.info("userBeanJson" + userBeanJson);
+
+        mockMvc
+            .perform(MockMvcRequestBuilders.post("/user/bd-user/createUser").contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON).content(userBeanJson))
+            .andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     /**
@@ -59,9 +69,10 @@ public class BdUserControllerTest {
     @Test
     public void getUser() throws Exception {
         String userId = "";
-        mvc.perform(
-            MockMvcRequestBuilders.get("/user/bd-user/getUser").param("userId", "7ef4b34c-4bea-4dd3-b367-e3da33fc6bb6")
-                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/user/bd-user/getUser")
+                .param("userId", "7ef4b34c-4bea-4dd3-b367-e3da33fc6bb6").contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
     }
 
@@ -72,9 +83,10 @@ public class BdUserControllerTest {
      */
     @Test
     public void getUserBeanList() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/user/bd-user/getUserBeanList")
-            .param("userId", "e7ee86ca-23f3-478c-9d38-3d2a1083c236").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(MockMvcResultHandlers.print()).andReturn();
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/user/bd-user/getUserBeanList")
+                .param("userId", "e7ee86ca-23f3-478c-9d38-3d2a1083c236").contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
     }
 }
