@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 前端控制器
@@ -35,7 +37,7 @@ public class BdUserController extends BaseController {
      */
     @PostMapping(value = "createUser")
     @ApiOperation(value = "创建用户信息")
-    public ResultBean createUser(@RequestBody BdUser bdUser) {
+    public ResultBean createUser(@Valid @RequestBody BdUser bdUser) {
         userService.createUser(bdUser);
         return ResultBean.success();
     }
@@ -48,7 +50,7 @@ public class BdUserController extends BaseController {
      */
     @PutMapping(value = "updateUser")
     @ApiOperation(value = "更新用户信息")
-    public ResultBean updateUser(BdUser bdUser) {
+    public ResultBean updateUser(@Valid @RequestBody BdUser bdUser) {
         userService.updateUser(bdUser);
         return ResultBean.success();
     }
@@ -61,7 +63,7 @@ public class BdUserController extends BaseController {
      */
     @PostMapping(value = "createUserAndDevice")
     @ApiOperation(value = "创建用户、用户与设备信息")
-    public ResultBean createUserAndDevice(@RequestBody UserDeviceBean userDeviceBean) {
+    public ResultBean createUserAndDevice(@Valid @RequestBody UserDeviceBean userDeviceBean) {
         userService.createUserAndDevice(userDeviceBean);
         return ResultBean.success();
     }

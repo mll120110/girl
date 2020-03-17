@@ -48,13 +48,15 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
      */
     public int createUser(BdUser bdUser) {
         int result;
-        if (bdUser.getUserId() != null) {
+        if (bdUser.getUserId() == null) {
             result = bdUserMapper.insert(bdUser);
         } else {
             result = this.updateUser(bdUser);
         }
         return result;
     }
+
+
 
     /**
      * 更新用户信息

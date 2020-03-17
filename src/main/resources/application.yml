@@ -6,17 +6,17 @@ content: "cupSize: ${cupSize},age: ${age}"
 spring:
   #数据库配置
   datasource:
-    url: jdbc:mysql://45.33.47.39:3306/spring_boot?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&nullNamePatternMatchesAll=true
-    username: jackroad
-    password: jackroad564312
+    url: jdbc:mysql://47.104.192.128:3306/spring_boot?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&nullNamePatternMatchesAll=true
+    username: supergis
+    password: Visionvera#3$4%5
     driver-class-name: com.mysql.cj.jdbc.Driver
   #关闭启动banner
   main:
     banner-mode: "off"
   redis:
-    host: 45.33.47.39
+    host: 47.104.192.128
     port: 6379
-    password: 564312mllMll.
+    password: Visionvera#3$4%5
     database: 0
     jedis:
       pool:

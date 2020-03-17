@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 
@@ -25,13 +27,20 @@ public class BdUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户主键", required = true)
+    @ApiModelProperty(value = "用户主键", hidden = true)
     @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
 
-    @ApiModelProperty(value = "用户name", required = true)
+    @ApiModelProperty(value = "用户登录账户", required = true, position = 0)
+    @NotNull
+    private String userAccount;
+
+    @ApiModelProperty(value = "用户name", required = true, position = 1)
     private String userName;
 
-    @ApiModelProperty(value = "用户状态0无效，1有效", required = true)
+    @ApiModelProperty(value = "用户状态0无效，1有效", required = true, position = 2)
     private Integer state;
+
+    @ApiModelProperty(value = "用户权限0超级管理员，1普通用户", required = true, position = 3)
+    private Integer permission;
 }

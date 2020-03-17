@@ -1,14 +1,12 @@
 package com.vision.girl.meet.controller;
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
 import com.vision.girl.common.BaseController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Jack Road
@@ -19,3 +17,4 @@ import com.vision.girl.common.BaseController;
 public class ReUserMeetController extends BaseController {
 
 }
+

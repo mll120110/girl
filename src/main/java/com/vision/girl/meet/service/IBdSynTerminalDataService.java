@@ -1,8 +1,8 @@
 package com.vision.girl.meet.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.vision.girl.common.ResultBean;
 import com.vision.girl.meet.entity.BdSynTerminalData;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.vision.girl.meet.entity.MeetBean;
 import org.springframework.stereotype.Service;
 
