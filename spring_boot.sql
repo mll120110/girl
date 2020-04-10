@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : GIS126
+ Source Server         : Ali-qingdao
  Source Server Type    : MySQL
- Source Server Version : 50626
- Source Host           : 10.1.7.126:3306
+ Source Server Version : 50646
+ Source Host           : 47.104.192.128:3306
  Source Schema         : spring_boot
 
  Target Server Type    : MySQL
- Target Server Version : 50626
+ Target Server Version : 50646
  File Encoding         : 65001
 
- Date: 25/09/2019 17:30:59
+ Date: 10/04/2020 18:44:06
 */
 
 SET NAMES utf8mb4;
@@ -30,6 +30,50 @@ CREATE TABLE `bd_device`  (
   `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`device_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for bd_module
+-- ----------------------------
+DROP TABLE IF EXISTS `bd_module`;
+CREATE TABLE `bd_module`  (
+  `module_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块id',
+  `module_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块code',
+  `modele_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块名字',
+  `parent_module` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '父级模块code',
+  `modele_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块路由',
+  `state` int(10) NOT NULL COMMENT '状态',
+  `create_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  PRIMARY KEY (`module_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for bd_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `bd_permission`;
+CREATE TABLE `bd_permission`  (
+  `permission_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `permission_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `permission_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `state` int(10) NOT NULL,
+  `create_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`permission_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for bd_role
+-- ----------------------------
+DROP TABLE IF EXISTS `bd_role`;
+CREATE TABLE `bd_role`  (
+  `role_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色id',
+  `role_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色编码',
+  `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色name',
+  `state` int(10) NOT NULL COMMENT '状态',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for bd_syn_terminal_data
@@ -56,13 +100,29 @@ CREATE TABLE `bd_syn_terminal_data`  (
 DROP TABLE IF EXISTS `bd_user`;
 CREATE TABLE `bd_user`  (
   `user_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户主键',
+  `user_account` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录用户账号',
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户name',
   `state` int(10) NOT NULL COMMENT '用户状态',
+  `permission` int(10) NOT NULL COMMENT '用户权限0超级管理员，1普通用户',
   `create_time` datetime(0) NOT NULL,
   `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`user_id`) USING BTREE,
-  UNIQUE INDEX `index_user_id`(`user_id`) USING BTREE
+  UNIQUE INDEX `index_user_id`(`user_id`, `state`, `permission`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for re_module_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `re_module_permission`;
+CREATE TABLE `re_module_permission`  (
+  `re_module_permission` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `module_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `permission_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `state` int(10) NOT NULL,
+  `create_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`re_module_permission`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for re_user_device
@@ -91,5 +151,19 @@ CREATE TABLE `re_user_meet`  (
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`re_user_meet_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for re_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `re_user_role`;
+CREATE TABLE `re_user_role`  (
+  `bd_user_role_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户角色id',
+  `user_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户id',
+  `role_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色id',
+  `state` int(10) NOT NULL COMMENT '状态',
+  `create_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  PRIMARY KEY (`bd_user_role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
