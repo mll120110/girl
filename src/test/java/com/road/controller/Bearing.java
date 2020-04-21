@@ -1,4 +1,4 @@
-package com.road.demo;
+package com.road.controller;
 
 public class Bearing {
 
@@ -6,7 +6,7 @@ public class Bearing {
 
     /**
      * 计算两个经纬度之间的距离
-     * 
+     *
      * @param long1
      *            第一点经度
      * @param lat1
@@ -38,7 +38,7 @@ public class Bearing {
 
     /**
      * 计算两个经纬度之间的方位角
-     * 
+     *
      * @param lon1
      * @param lat1
      * @param lon2

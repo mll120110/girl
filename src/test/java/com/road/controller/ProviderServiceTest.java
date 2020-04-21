@@ -1,4 +1,4 @@
-package com.road.demo;
+package com.road.controller;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
