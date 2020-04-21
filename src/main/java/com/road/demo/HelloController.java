@@ -7,14 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-	@Value("${cupSize}")
-	private String cupSize;
-
-	@Value("${age}")
-	private Integer age;
-
-	@Value("${content}")
-	private String content;
+	private String content = "Hello World Girl";
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String say() {

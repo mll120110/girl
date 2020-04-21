@@ -1,8 +1,6 @@
 server:
   port: 8081
-cupSize: B
-age: 18
-content: "cupSize: ${cupSize},age: ${age}"
+
 spring:
   #数据库配置
   datasource:
