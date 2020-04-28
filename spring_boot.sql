@@ -11,7 +11,7 @@
  Target Server Version : 50646
  File Encoding         : 65001
 
- Date: 11/04/2020 10:59:59
+ Date: 28/04/2020 17:33:10
 */
 
 SET NAMES utf8mb4;
@@ -36,10 +36,10 @@ CREATE TABLE `bd_device`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bd_module`;
 CREATE TABLE `bd_module`  (
-  `module_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块id',
+  `module_id` bigint(20) NOT NULL COMMENT '模块id',
   `module_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块code',
   `modele_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块名字',
-  `parent_module` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '父级模块code',
+  `parent_module` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父级模块code',
   `modele_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块路由',
   `state` int(10) NOT NULL COMMENT '状态0无效，1有效',
   `create_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
@@ -52,7 +52,7 @@ CREATE TABLE `bd_module`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bd_permission`;
 CREATE TABLE `bd_permission`  (
-  `permission_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `permission_id` bigint(20) NOT NULL COMMENT '主键id',
   `permission_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '权限编码',
   `permission_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '权限名字',
   `state` int(10) NOT NULL COMMENT '状态0无效，1有效',
@@ -66,7 +66,7 @@ CREATE TABLE `bd_permission`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bd_role`;
 CREATE TABLE `bd_role`  (
-  `role_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色id',
+  `role_id` bigint(20) NOT NULL COMMENT '角色id',
   `role_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色编码',
   `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色name',
   `state` int(10) NOT NULL COMMENT '状态0无效，1有效',
@@ -99,7 +99,7 @@ CREATE TABLE `bd_syn_terminal_data`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bd_user`;
 CREATE TABLE `bd_user`  (
-  `user_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户主键',
+  `user_id` bigint(20) NOT NULL COMMENT '用户主键',
   `user_account` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录用户账号',
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户name',
   `state` int(10) NOT NULL COMMENT '状态0无效，1有效',
@@ -123,6 +123,20 @@ CREATE TABLE `re_module_permission`  (
   `update_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`re_module_permission_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块与权限关系表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for re_role_module
+-- ----------------------------
+DROP TABLE IF EXISTS `re_role_module`;
+CREATE TABLE `re_role_module`  (
+  `re_role_module` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色与模块关系',
+  `role_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色id',
+  `module_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块id',
+  `state` int(10) NOT NULL COMMENT '状态0失效1有效',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`re_role_module`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for re_role_rmp
