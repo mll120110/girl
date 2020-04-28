@@ -1,11 +1,17 @@
 package com.vision.girl.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 全局异常处理类，可以根据实际情况进行拓展
@@ -90,5 +96,35 @@ public class GlobalExceptionHandler {
     public ResultBean illegalArgumentException(IllegalArgumentException e) {
         log.error("非法参数异常", e);
         return ResultBean.error(500, "非法参数异常" + e);
+    }
+
+    /**
+     * 主键重复异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler
+    public ResultBean duplicateKey(SQLIntegrityConstraintViolationException e) {
+        log.error("主键重复异常", e);
+        return ResultBean.error(500, "主键重复异常" + e.getMessage());
+    }
+
+    /**
+     * 字段校验不通过
+     * 
+     * @param e
+     * @return
+     */
+    @ExceptionHandler
+    public ResultBean methodArg(MethodArgumentNotValidException e) {
+        List<String> listStr = new ArrayList<>();
+        List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
+        allErrors.forEach(objectError -> {
+            FieldError fieldError = (FieldError)objectError;
+            listStr.add(fieldError.getDefaultMessage());
+        });
+        log.info("字段校验不通过" + listStr.toString());
+        return ResultBean.error(500, "字段校验不通过: " + listStr.toString());
     }
 }

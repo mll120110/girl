@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -34,10 +34,11 @@ public class BdUser extends BaseEntity {
     private Long userId;
 
     @ApiModelProperty(value = "用户登录账户", required = true, position = 0)
-    @NotNull
+    @NotBlank(message = "userAccount不能为空")
     private String userAccount;
 
     @ApiModelProperty(value = "用户name", required = true, position = 1)
+    @NotBlank(message = "userName不能为空")
     private String userName;
 
     @ApiModelProperty(value = "用户状态0无效，1有效", required = true, position = 2)

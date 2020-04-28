@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 角色表
@@ -33,9 +35,11 @@ public class BdRole extends BaseEntity {
     private Long roleId;
 
     @ApiModelProperty(value = "角色编码")
+    @NotBlank(message = "roleCode不能为空")
     private String roleCode;
 
     @ApiModelProperty(value = "角色name")
+    @NotBlank(message = "roleName不能为空")
     private String roleName;
 
     @ApiModelProperty(value = "状态0无效，1有效")
