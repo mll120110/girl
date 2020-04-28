@@ -3,15 +3,12 @@ package com.vision.girl.user.controller;
 import com.vision.girl.common.BaseController;
 import com.vision.girl.common.ResultBean;
 import com.vision.girl.user.entity.BdUser;
-import com.vision.girl.user.service.IBdDeviceService;
 import com.vision.girl.user.service.IBdUserService;
-import com.vision.girl.user.service.impl.BdDeviceServiceImpl;
 import com.vision.girl.user.service.impl.BdUserServiceImpl;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
