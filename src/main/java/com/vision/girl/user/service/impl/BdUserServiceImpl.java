@@ -1,6 +1,7 @@
 package com.vision.girl.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -49,14 +50,16 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
     public int createUser(BdUser bdUser) {
         int result;
         if (bdUser.getUserId() == null) {
+            bdUser.setState(1);
+            bdUser.setCreateTime(LocalDateTime.now());
+            bdUser.setUpdateTime(LocalDateTime.now());
             result = bdUserMapper.insert(bdUser);
         } else {
-            result = this.updateUser(bdUser);
+            bdUser.setUpdateTime(LocalDateTime.now());
+            result = this.updateUser(bdUser, 0L);
         }
         return result;
     }
-
-
 
     /**
      * 更新用户信息
@@ -65,8 +68,10 @@ public class BdUserServiceImpl extends ServiceImpl<BdUserMapper, BdUser> impleme
      * @return
      */
     @Override
-    public int updateUser(BdUser bdUser) {
-        return bdUserMapper.update(bdUser, null);
+    public int updateUser(BdUser bdUser, Long userId) {
+        UpdateWrapper<BdUser> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("user_id", (userId != 0L) ? userId : bdUser.getUserId());
+        return bdUserMapper.update(bdUser, userUpdateWrapper);
     }
 
     /**

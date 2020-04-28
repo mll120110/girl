@@ -1,6 +1,7 @@
-package com.vision.girl.usermodule.permission.entity;
+package com.vision.girl.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vision.girl.common.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -25,9 +26,10 @@ public class BdModule extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "模块id")
-    @TableId(value = "module_id", type = IdType.UUID)
-    private String moduleId;
+    @ApiModelProperty(value = "模块id", hidden = true)
+    @TableId(value = "module_id", type = IdType.ID_WORKER)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long moduleId;
 
     @ApiModelProperty(value = "模块code")
     private String moduleCode;

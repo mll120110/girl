@@ -1,6 +1,6 @@
-package com.vision.girl.usermodule.permission.mapper;
+package com.vision.girl.user.mapper;
 
-import com.vision.girl.usermodule.permission.entity.BdPermission;
+import com.vision.girl.user.entity.BdPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

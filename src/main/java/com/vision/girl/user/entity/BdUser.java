@@ -2,6 +2,7 @@ package com.vision.girl.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vision.girl.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,8 +29,9 @@ public class BdUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户主键", hidden = true)
-    @TableId(value = "user_id", type = IdType.UUID)
-    private String userId;
+    @TableId(value = "user_id", type = IdType.ID_WORKER)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long userId;
 
     @ApiModelProperty(value = "用户登录账户", required = true, position = 0)
     @NotNull

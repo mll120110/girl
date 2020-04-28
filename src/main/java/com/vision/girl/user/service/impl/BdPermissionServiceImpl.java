@@ -1,8 +1,8 @@
-package com.vision.girl.usermodule.permission.service.impl;
+package com.vision.girl.user.service.impl;
 
-import com.vision.girl.usermodule.permission.entity.BdPermission;
-import com.vision.girl.usermodule.permission.mapper.BdPermissionMapper;
-import com.vision.girl.usermodule.permission.service.IBdPermissionService;
+import com.vision.girl.user.entity.BdPermission;
+import com.vision.girl.user.mapper.BdPermissionMapper;
+import com.vision.girl.user.service.IBdPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

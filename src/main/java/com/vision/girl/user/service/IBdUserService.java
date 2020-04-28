@@ -31,7 +31,7 @@ public interface IBdUserService extends IService<BdUser> {
      * @param bdUser
      * @return
      */
-    int updateUser(BdUser bdUser);
+    int updateUser(BdUser bdUser, Long userId);
 
     /**
      * 新增用户、用户与设备绑定关系数据

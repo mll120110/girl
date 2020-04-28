@@ -42,7 +42,7 @@ public class BdUserServiceTest {
     public BdUserServiceTest() {
         // 实例化user信息
         bdUser = new BdUser();
-        bdUser.setUserId(UUID.randomUUID().toString());
+        bdUser.setUserId(1L);
         bdUser.setUserName("Jack Road");
         // 状态0无效，1有效
         bdUser.setState(1);
@@ -68,7 +68,7 @@ public class BdUserServiceTest {
     @Test
     public void updateUser() throws Exception {
         bdUser.setUpdateTime(LocalDateTime.now());
-        iBdUserService.updateUser(bdUser);
+        iBdUserService.updateUser(bdUser, 0L);
     }
 
     @Test

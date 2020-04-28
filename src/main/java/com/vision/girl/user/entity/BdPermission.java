@@ -1,6 +1,7 @@
-package com.vision.girl.usermodule.permission.entity;
+package com.vision.girl.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vision.girl.common.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -25,8 +26,9 @@ public class BdPermission extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
-    @TableId(value = "permission_id", type = IdType.UUID)
+    @ApiModelProperty(value = "主键id", hidden = true)
+    @TableId(value = "permission_id", type = IdType.ID_WORKER)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private String permissionId;
 
     @ApiModelProperty(value = "权限编码")

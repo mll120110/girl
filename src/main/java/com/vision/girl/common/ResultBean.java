@@ -60,6 +60,18 @@ public class ResultBean<T> {
     }
 
     /**
+     *
+     * @param message
+     * @return
+     */
+    public static ResultBean success(String message) {
+        ResultBean resultBean = new ResultBean();
+        resultBean.setCode(200);
+        resultBean.setMessage(message);
+        return resultBean;
+    }
+
+    /**
      * Java集合由两类数据结构构成Collection、Map，构建2大类的数据返回Bean
      */
 

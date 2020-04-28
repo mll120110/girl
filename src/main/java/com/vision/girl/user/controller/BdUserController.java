@@ -48,10 +48,10 @@ public class BdUserController extends BaseController {
      * @param bdUser
      * @return
      */
-    @PutMapping(value = "updateUser")
+    @PutMapping(value = "createUser")
     @ApiOperation(value = "更新用户信息")
     public ResultBean updateUser(@Valid @RequestBody BdUser bdUser) {
-        userService.updateUser(bdUser);
+        userService.updateUser(bdUser, 0L);
         return ResultBean.success();
     }
 

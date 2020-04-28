@@ -33,7 +33,7 @@ public class ReUserDevice extends BaseEntity {
 
     @ApiModelProperty(value = "用户表外键id")
     @TableField(value = "user_id")
-    private String userId;
+    private Long userId;
 
     @ApiModelProperty(value = "设备表外键id")
     @TableField(value = "device_id")

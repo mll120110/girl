@@ -1,4 +1,4 @@
-package com.vision.girl.usermodule.permission.controller;
+package com.vision.girl.user.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import com.vision.girl.common.BaseController;
  * @since 2020-04-11
  */
 @RestController
-@RequestMapping("/usermodule.permission/bd-permission")
+@RequestMapping("/user/bd-permission")
 public class BdPermissionController extends BaseController {
 
 }
