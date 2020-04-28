@@ -3,7 +3,10 @@ package com.vision.girl.user.controller;
 import com.vision.girl.common.BaseController;
 import com.vision.girl.common.ResultBean;
 import com.vision.girl.user.entity.BdUser;
+import com.vision.girl.user.service.IBdDeviceService;
 import com.vision.girl.user.service.IBdUserService;
+import com.vision.girl.user.service.impl.BdDeviceServiceImpl;
+import com.vision.girl.user.service.impl.BdUserServiceImpl;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +28,20 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/user/bd-user/restful")
 public class BdUserRestfulController extends BaseController {
+
+    /**
+     * 修改@Autowired注入方式，为构造器注入方式
+     */
+    private final IBdUserService userService;
+
     @Autowired
-    @Qualifier("bdUserServiceImpl")
-    IBdUserService userService;
+    public BdUserRestfulController(BdUserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     /**
      * 新增用户，使用Mybatis-plus自带组件新增一条记录
-     * 
+     *
      * @param bdUser
      * @return
      */
@@ -44,7 +54,7 @@ public class BdUserRestfulController extends BaseController {
 
     /**
      * 分页获取userList
-     * 
+     *
      * @param startPage
      * @param endPage
      * @return
@@ -68,7 +78,7 @@ public class BdUserRestfulController extends BaseController {
 
     /**
      * 更新用户信息，put方式，body需要传递对象的所有字段
-     * 
+     *
      * @param bdUser
      * @param userId
      * @return
@@ -82,7 +92,7 @@ public class BdUserRestfulController extends BaseController {
 
     /**
      * 更新用户信息，patch方式，body需要传递对象的部分字段
-     * 
+     *
      * @param bdUser
      * @param userId
      * @return
@@ -96,7 +106,7 @@ public class BdUserRestfulController extends BaseController {
 
     /**
      * 删除用户信息，delete方式
-     * 
+     *
      * @param userId
      * @return
      */
