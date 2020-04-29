@@ -74,7 +74,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
         boolean restult = false;
         List<ReUserRole> userRoleList = new ArrayList<>();
         // 获取当前用户绑定有效角色
-        List<ReUserRole> selectRoleList = this.getReUserRoleList(userId);
+        List<ReUserRole> selectRoleList = this.getReUserRoleList(userId, 1);
         // 已绑定有效角色集合与前端发送的集合求并集
         if (selectRoleList != null && selectRoleList.size() > 0) {
             roleList = roleList.stream().filter(item -> selectRoleList.contains(item)).collect(Collectors.toList());
@@ -102,6 +102,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
     @Override
     public boolean updateUserRole(Long userId, List<BdRole> roleList) {
         List<ReUserRole> userRoleList = new ArrayList<>();
+        // 获取当前绑定用户所有角色(包含无效、有效的所有角色)
+        List<ReUserRole> selectRoleList = this.getReUserRoleList(userId, -1);
         roleList.forEach(bdRole -> {
             ReUserRole reUserRole = new ReUserRole();
             reUserRole.setUserId(userId);
@@ -130,11 +132,13 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
      * @param userId
      * @return
      */
-    public List<ReUserRole> getReUserRoleList(Long userId) {
+    public List<ReUserRole> getReUserRoleList(Long userId, Integer state) {
         Map<String, Object> map = new HashMap<>(16);
         map.put("user_id", userId);
-        // 有效状态
-        map.put("state", 1);
+        // -1不传值，0无效，1有效状态
+        if (-1 != state) {
+            map.put("state", state);
+        }
         return userRoleMapper.selectByMap(map);
     }
 }
