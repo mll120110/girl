@@ -1,6 +1,6 @@
 package com.vision.girl.usermodule.permission.service;
 
-import com.vision.girl.usermodule.permission.entity.ReUserRole;
+import com.vision.girl.user.entity.ReUserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

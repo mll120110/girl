@@ -1,4 +1,4 @@
-package com.vision.girl.usermodule.permission.entity;
+package com.vision.girl.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.vision.girl.common.BaseEntity;
@@ -26,14 +26,14 @@ public class ReUserRole extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户角色id")
-    @TableId(value = "bd_user_role_id", type = IdType.UUID)
-    private String bdUserRoleId;
+    @TableId(value = "bd_user_role_id", type = IdType.ID_WORKER)
+    private Long bdUserRoleId;
 
     @ApiModelProperty(value = "用户id")
-    private String userId;
+    private Long userId;
 
     @ApiModelProperty(value = "角色id")
-    private String roleId;
+    private Long roleId;
 
     @ApiModelProperty(value = "状态0无效，1有效")
     private Integer state;
