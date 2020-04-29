@@ -45,9 +45,9 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
         List<ReUserRole> userRoleList = new ArrayList<>();
         // 获取当前用户已绑定的角色
         List<BdRole> bdRoleList = this.getRoleListByUserId(userId);
-        // 移除已绑定重复的标签（求bdRoleList集合与roleList的差集）,求roleList差集
+        // 集合移除已绑定重复的标签（求bdRoleList集合与roleList的差集）,求roleList差集
         if (bdRoleList != null && bdRoleList.size() > 0) {
-            roleList = roleList.stream().filter(item -> bdRoleList.contains(item)).collect(Collectors.toList());
+            roleList = roleList.stream().filter(item -> !bdRoleList.contains(item)).collect(Collectors.toList());
         }
         roleList.forEach(bdRole -> {
             ReUserRole reUserRole = new ReUserRole();
@@ -64,30 +64,37 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
 
     /**
      * 单用户移除角色列表
-     * 
+     *
      * @param userId
      * @param roleList
      * @return
      */
     @Override
     public boolean removeUserRole(Long userId, List<BdRole> roleList) {
+        boolean restult = false;
         List<ReUserRole> userRoleList = new ArrayList<>();
+        // 获取当前用户绑定有效角色
         List<ReUserRole> selectRoleList = this.getReUserRoleList(userId);
+        // 已绑定有效角色集合与前端发送的集合求并集
         if (selectRoleList != null && selectRoleList.size() > 0) {
-
+            roleList = roleList.stream().filter(item -> selectRoleList.contains(item)).collect(Collectors.toList());
+            if (roleList != null && roleList.size() > 0) {
+                roleList.forEach(bdRole -> {
+                    ReUserRole reUserRole = new ReUserRole();
+                    reUserRole.setUserId(userId);
+                    reUserRole.setRoleId(bdRole.getRoleId());
+                    userRoleList.add(reUserRole);
+                    log.info("userRoleList" + userRoleList.toString());
+                });
+                restult = userRoleMapper.updateUserRoleList(userRoleList);
+            }
         }
-        roleList.forEach(bdRole -> {
-            ReUserRole reUserRole = new ReUserRole();
-            reUserRole.setUserId(userId);
-            reUserRole.setRoleId(bdRole.getRoleId());
-            userRoleList.add(reUserRole);
-        });
-        return userRoleMapper.updateUserRoleList(userRoleList);
+        return restult;
     }
 
     /**
      * 单用户更新角色列表
-     * 
+     *
      * @param userId
      * @param roleList
      * @return
@@ -108,7 +115,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
 
     /**
      * 单用户所有角色列表
-     * 
+     *
      * @param userId
      * @return
      */
@@ -119,7 +126,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
 
     /**
      * 当前用户有效的角色列表
-     * 
+     *
      * @param userId
      * @return
      */

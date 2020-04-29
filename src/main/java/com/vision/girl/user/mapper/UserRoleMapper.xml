@@ -5,7 +5,7 @@
     <update id="updateUserRoleList" parameterType="java.util.List">
         update re_user_role
         set state=0, update_time = now()
-        where user_id in
+        where state = 1 and user_id in
         <foreach collection="list" item="reUserRole" index="index"
                  separator="," open="(" close=")">
             #{reUserRole.userId}
