@@ -11,7 +11,7 @@
             #{reUserRole.userId}
         </foreach>
         and role_id in
-        <foreach collection="list" index="reUserRole" item="item"
+        <foreach collection="list" item="reUserRole" index="index"
                  separator="," open="(" close=")">
             #{reUserRole.roleId}
         </foreach>
