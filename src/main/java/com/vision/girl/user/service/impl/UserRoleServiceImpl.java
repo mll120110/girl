@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -42,24 +40,31 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
      */
     @Override
     public boolean createUserRole(Long userId, List<BdRole> roleList) {
+        boolean addResult = false;
+        List<BdRole> addList = roleList;;
         List<ReUserRole> userRoleList = new ArrayList<>();
         // 获取当前用户已绑定的角色
-        List<BdRole> bdRoleList = this.getRoleListByUserId(userId);
-        // 集合移除已绑定重复的标签（求bdRoleList集合与roleList的差集）,求roleList差集
+        List<BdRole> bdRoleList = this.getRoleListByUserId(userId, -1);
+        // 若用户已存在绑定角色
         if (bdRoleList != null && bdRoleList.size() > 0) {
-            roleList = roleList.stream().filter(item -> !bdRoleList.contains(item)).collect(Collectors.toList());
+            // 取差集
+            addList = roleList.stream().filter(newRole -> !bdRoleList.stream().map(oldRole -> oldRole.hashCode())
+                .collect(Collectors.toList()).contains(newRole.hashCode())).collect(Collectors.toList());
         }
-        roleList.forEach(bdRole -> {
-            ReUserRole reUserRole = new ReUserRole();
-            reUserRole.setUserId(userId);
-            reUserRole.setRoleId(bdRole.getRoleId());
-            // 有效状态
-            reUserRole.setState(1);
-            reUserRole.setCreateTime(LocalDateTime.now());
-            reUserRole.setUpdateTime(LocalDateTime.now());
-            userRoleList.add(reUserRole);
-        });
-        return userRoleService.saveBatch(userRoleList);
+        if (addList != null && addList.size() > 0) {
+            addList.forEach(bdRole -> {
+                ReUserRole reUserRole = new ReUserRole();
+                reUserRole.setUserId(userId);
+                reUserRole.setRoleId(bdRole.getRoleId());
+                // 有效状态
+                reUserRole.setState(1);
+                reUserRole.setCreateTime(LocalDateTime.now());
+                reUserRole.setUpdateTime(LocalDateTime.now());
+                userRoleList.add(reUserRole);
+            });
+            addResult = userRoleService.saveBatch(userRoleList);
+        }
+        return addResult;
     }
 
     /**
@@ -72,19 +77,20 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
     @Override
     public boolean removeUserRole(Long userId, List<BdRole> roleList) {
         boolean restult = false;
+        List<BdRole> removeList;
         List<ReUserRole> userRoleList = new ArrayList<>();
         // 获取当前用户绑定有效角色
-        List<ReUserRole> selectRoleList = this.getReUserRoleList(userId, 1);
-        // 已绑定有效角色集合与前端发送的集合求并集
+        List<BdRole> selectRoleList = this.getRoleListByUserId(userId, 1);
+        //
         if (selectRoleList != null && selectRoleList.size() > 0) {
-            roleList = roleList.stream().filter(item -> selectRoleList.contains(item)).collect(Collectors.toList());
-            if (roleList != null && roleList.size() > 0) {
-                roleList.forEach(bdRole -> {
+            removeList = roleList.stream().filter(newRole -> selectRoleList.stream().map(oldRole -> oldRole.hashCode())
+                .collect(Collectors.toList()).contains(newRole.hashCode())).collect(Collectors.toList());
+            if (removeList != null && removeList.size() > 0) {
+                removeList.forEach(bdRole -> {
                     ReUserRole reUserRole = new ReUserRole();
                     reUserRole.setUserId(userId);
                     reUserRole.setRoleId(bdRole.getRoleId());
                     userRoleList.add(reUserRole);
-                    log.info("userRoleList" + userRoleList.toString());
                 });
                 restult = userRoleMapper.updateUserRoleList(userRoleList);
             }
@@ -101,44 +107,38 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, ReUserRole>
      */
     @Override
     public boolean updateUserRole(Long userId, List<BdRole> roleList) {
+        boolean updateResult = false;
+        List<BdRole> updateList = null;
         List<ReUserRole> userRoleList = new ArrayList<>();
         // 获取当前绑定用户所有角色(包含无效、有效的所有角色)
-        List<ReUserRole> selectRoleList = this.getReUserRoleList(userId, -1);
-        roleList.forEach(bdRole -> {
-            ReUserRole reUserRole = new ReUserRole();
-            reUserRole.setUserId(userId);
-            reUserRole.setRoleId(bdRole.getRoleId());
-            reUserRole.setCreateTime(LocalDateTime.now());
-            reUserRole.setUpdateTime(LocalDateTime.now());
-            userRoleList.add(reUserRole);
-        });
-        return userRoleService.updateBatchById(userRoleList);
+        List<BdRole> selectRoleList = this.getRoleListByUserId(userId, -1);
+        if (selectRoleList != null && selectRoleList.size() > 0) {
+            updateList = roleList.stream().filter(item -> selectRoleList.stream().map(e -> e.hashCode())
+                .collect(Collectors.toList()).contains(item.hashCode())).collect(Collectors.toList());
+        }
+        if (updateList != null && updateList.size() > 0) {
+            updateList.forEach(bdRole -> {
+                ReUserRole reUserRole = new ReUserRole();
+                reUserRole.setUserId(userId);
+                reUserRole.setRoleId(bdRole.getRoleId());
+                reUserRole.setCreateTime(LocalDateTime.now());
+                reUserRole.setUpdateTime(LocalDateTime.now());
+                userRoleList.add(reUserRole);
+            });
+            updateResult = userRoleMapper.updateUserRoleList(userRoleList);
+        }
+        return updateResult;
     }
 
     /**
      * 单用户所有角色列表
      *
      * @param userId
+     * @Param state
      * @return
      */
     @Override
-    public List<BdRole> getRoleListByUserId(Long userId) {
-        return userRoleMapper.selectUserRoleList(userId);
-    }
-
-    /**
-     * 当前用户有效的角色列表
-     *
-     * @param userId
-     * @return
-     */
-    public List<ReUserRole> getReUserRoleList(Long userId, Integer state) {
-        Map<String, Object> map = new HashMap<>(16);
-        map.put("user_id", userId);
-        // -1不传值，0无效，1有效状态
-        if (-1 != state) {
-            map.put("state", state);
-        }
-        return userRoleMapper.selectByMap(map);
+    public List<BdRole> getRoleListByUserId(Long userId, Integer state) {
+        return userRoleMapper.selectUserRoleList(userId, state);
     }
 }

@@ -23,5 +23,5 @@ public interface UserRoleMapper extends BaseMapper<ReUserRole> {
      * @param userId
      * @return
      */
-    List<BdRole> selectUserRoleList(@Param(value = "userId") Long userId);
+    List<BdRole> selectUserRoleList(@Param(value = "userId") Long userId, @Param(value = "state") Integer state);
 }

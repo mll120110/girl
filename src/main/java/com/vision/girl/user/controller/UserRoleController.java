@@ -77,6 +77,6 @@ public class UserRoleController extends BaseController {
     @GetMapping(value = "role/{userId}")
     @ApiModelProperty(value = "单用户所有角色列表")
     public ResultBean selectUserRole(@PathVariable Long userId) {
-        return ResultBean.success(userRoleService.getRoleListByUserId(userId));
+        return ResultBean.success(userRoleService.getRoleListByUserId(userId, 1));
     }
 }

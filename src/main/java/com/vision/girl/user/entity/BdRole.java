@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vision.girl.common.BaseEntity;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 /**
  * <p>
@@ -45,5 +45,8 @@ public class BdRole extends BaseEntity {
     @ApiModelProperty(value = "状态0无效，1有效")
     private Integer state;
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleName, roleCode, state);
+    }
 }

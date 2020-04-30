@@ -21,9 +21,11 @@
     <select id="selectUserRoleList" resultType="com.vision.girl.user.entity.BdRole">
         SELECT br.*
         FROM re_user_role rur
-                 JOIN bd_role br ON rur.role_id = br.role_id
+        JOIN bd_role br ON rur.role_id = br.role_id
         WHERE rur.user_id = #{userId}
-          AND rur.state = 1
-          AND br.state = 1
+        <if test="state != -1">
+            AND rur.state = #{state}
+        </if>
+        AND br.state = 1
     </select>
 </mapper>

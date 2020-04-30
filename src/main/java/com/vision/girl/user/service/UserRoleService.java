@@ -48,6 +48,6 @@ public interface UserRoleService extends IService<ReUserRole> {
      * @param userId
      * @return
      */
-    List<BdRole> getRoleListByUserId(Long userId);
+    List<BdRole> getRoleListByUserId(Long userId, Integer state);
 
 }
