@@ -22,14 +22,20 @@ public class DynamicProxyMain {
     }
 
     public static void main(String[] args) {
+        // new一个新的对象
         RealObject realObject = new RealObject();
+        // 调用consumer方法
         consumer(realObject);
         System.out.println("==============================");
 
-        // 动态代理
+        // ========动态代理=========
+        // 获取类加载器
         ClassLoader classLoader = Interface.class.getClassLoader();
+        // 代理类要实现的接口
         Class<?>[] interfaces = new Class[] {Interface.class};
+        // 调用处理对象
         InvocationHandler handler = new DynamicProxyHandler(realObject);
+        // java中反射包，返回Object，强制转换为Interface
         Interface proxy = (Interface)Proxy.newProxyInstance(classLoader, interfaces, handler);
 
         System.out.println("in dynamicProxyMain proxy:" + proxy.getClass());
