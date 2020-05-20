@@ -1,4 +1,4 @@
-package com.road.LeeCode;
+package com.road.LeeCode.ListNode;
 
 /**
  * 删除链表的倒数第N个节点
