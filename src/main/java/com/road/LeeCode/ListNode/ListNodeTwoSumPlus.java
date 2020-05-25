@@ -16,17 +16,6 @@ package com.road.LeeCode.ListNode;
  * @author Jack Road
  */
 public class ListNodeTwoSumPlus {
-    /**
-     * 内部Node节点类
-     */
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 算法思路

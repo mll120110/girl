@@ -13,17 +13,6 @@ package com.road.LeeCode.ListNode;
  *
  */
 public class ListNodeRemoveFromEnd {
-    /**
-     * 内部Node节点类
-     */
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 两次遍历算法
