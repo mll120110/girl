@@ -14,6 +14,8 @@ package com.road.LeeCode.ListNode;
 public class ListNodeMergeTwoSortLists {
 
     /**
+     * 解决方法一
+     *
      * 算法
      *
      * 我们直接将以上递归过程建模，同时需要考虑边界情况。
@@ -46,6 +48,10 @@ public class ListNodeMergeTwoSortLists {
     }
 
     /**
+     * 解决方法二
+     * 
+     * 思路
+     *
      * 首先，我们设定一个哨兵节点 prehead ，这可以在最后让我们比较容易地返回合并后的链表。
      *
      * 我们维护一个 prev 指针，我们需要做的是调整它的 next 指针。
@@ -97,7 +103,10 @@ public class ListNodeMergeTwoSortLists {
     public static void main(String[] args) {
         ListNode l1 = setListNode();
         ListNode l2 = setListNode();
-        ListNode l3 = mergeTwoLists1(l1, l2);
+        ListNode l3 = mergeTwoLists(l1, l2);
         System.out.println(l3);
+
+        ListNode l4 = mergeTwoLists1(l1, l2);
+        System.out.println(l4);
     }
 }

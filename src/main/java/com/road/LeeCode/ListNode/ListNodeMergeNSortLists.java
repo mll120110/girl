@@ -92,12 +92,48 @@ public class ListNodeMergeNSortLists {
      * 解决方法三
      * 
      * 思路
+     *
+     * 先将ListNode数组拆分中2部分，即二分法+递归的方式
      * 
      * @param lists
      * @return
      */
     public ListNode mergeKLists2(ListNode[] lists) {
-        return null;
+        return mergeLists(lists, 0, lists.length);
+    }
+
+    public ListNode mergeLists(ListNode[] lists, int start, int end) {
+        int count = end - start;
+        if (count == 0) {
+            return null;
+        } else if (count == 1) {
+            return lists[start];
+        } else {
+            // 取中间数，count >> 1，2进制向右移动1位，十进制除以2， 8 >> 1 = 4, 8 >> 2 = 2
+            int middle = start + (count >> 1);
+            ListNode left = mergeLists(lists, start, middle);
+            ListNode right = mergeLists(lists, middle, end);
+
+            ListNode head = new ListNode(0);
+            ListNode p = head;
+
+            while (left != null && right != null) {
+                if (left.val < right.val) {
+                    p.next = left;
+                    left = left.next;
+                } else {
+                    p.next = right;
+                    right = right.next;
+                }
+                p = p.next;
+            }
+
+            if (left != null)
+                p.next = left;
+            else if (right != null)
+                p.next = right;
+            return head.next;
+        }
     }
 
     /**
