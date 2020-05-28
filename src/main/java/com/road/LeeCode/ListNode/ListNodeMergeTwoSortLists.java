@@ -92,17 +92,10 @@ public class ListNodeMergeTwoSortLists {
         return preHead.next;
     }
 
-    public static ListNode setListNode() {
-        ListNode listNode = new ListNode(1);
-        listNode.next = new ListNode(2);
-        listNode.next.next = new ListNode(3);
-        listNode.next.next.next = new ListNode(4);
-        return listNode;
-    }
 
     public static void main(String[] args) {
-        ListNode l1 = setListNode();
-        ListNode l2 = setListNode();
+        ListNode l1 = ListNode.setListNode();
+        ListNode l2 = ListNode.setListNode();
         ListNode l3 = mergeTwoLists(l1, l2);
         System.out.println(l3);
 
