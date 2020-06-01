@@ -94,8 +94,8 @@ public class ListNodeMergeTwoSortLists {
 
 
     public static void main(String[] args) {
-        ListNode l1 = ListNode.setListNode();
-        ListNode l2 = ListNode.setListNode();
+        ListNode l1 = ListNode.setListNode(5);
+        ListNode l2 = ListNode.setListNode(5);
         ListNode l3 = mergeTwoLists(l1, l2);
         System.out.println(l3);
 
