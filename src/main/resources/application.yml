@@ -34,3 +34,11 @@ mybatis-plus:
   global-config:
     banner: false
   check-config-location: true
+
+# 打开所有的监控点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      #include: metrics,httptrace
