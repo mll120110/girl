@@ -140,6 +140,11 @@
             <!-- 请到https://search.maven.org/search?q=tencentcloud-sdk-java查询最新版本 -->
             <version>3.0.124</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
