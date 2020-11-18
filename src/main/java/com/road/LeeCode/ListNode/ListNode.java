@@ -1,5 +1,7 @@
 package com.road.LeeCode.ListNode;
 
+import java.util.HashMap;
+
 /**
  * 链表数组
  *
@@ -10,11 +12,17 @@ public class ListNode {
     ListNode next;
 
     ListNode() {
+        HashMap hashMap = new HashMap(16);
 
     }
 
+    /**
+     * 初始化ListNode大小
+     *
+     * @param x
+     */
     ListNode(int x) {
-        val = x;
+        setListNode(x);
     }
 
     /**
@@ -30,7 +38,7 @@ public class ListNode {
 
     /**
      * 设置ListNode长度
-     * 
+     *
      * @param length
      * @param tail
      * @return
@@ -72,7 +80,7 @@ public class ListNode {
 
     /**
      * ListNode尾插法，插入指定ListNode节点
-     * 
+     *
      * @param length
      *            listNode的长度
      * @return ListNode
