@@ -28,8 +28,8 @@ public class ListNode {
     /**
      * 设置ListNode长度，并使用尾插法
      *
-     * @param length
-     * @return
+     * @param length 链表长度
+     * @return 链表
      */
     public static ListNode setListNode(int length) {
         // 默认返回尾插法ListNode
@@ -39,9 +39,9 @@ public class ListNode {
     /**
      * 设置ListNode长度
      *
-     * @param length
-     * @param tail
-     * @return
+     * @param length 链表长度
+     * @param tail 头插还是尾插
+     * @return ListNode
      */
     public static ListNode setListNode(int length, boolean tail) {
         // 若是tail(true),返回尾插法ListNode
@@ -55,8 +55,7 @@ public class ListNode {
     /**
      * 设置listNode列表,并使用头插法插入数据
      *
-     * @param length
-     *            listNode的长度
+     * @param length listNode的长度
      * @return ListNode
      */
     public static ListNode headSetListNode(int length) {
@@ -81,8 +80,7 @@ public class ListNode {
     /**
      * ListNode尾插法，插入指定ListNode节点
      *
-     * @param length
-     *            listNode的长度
+     * @param length listNode的长度
      * @return ListNode
      */
     public static ListNode tailSetListNode(int length) {
