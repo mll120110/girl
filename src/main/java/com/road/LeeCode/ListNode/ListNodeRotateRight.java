@@ -40,14 +40,17 @@ public class ListNodeRotateRight {
         }
         // 若listNode只有一个节点返回
         if (head.next == null) {
-            return null;
+            return head;
         }
         // 单链表转循环链表
         ListNode oldTail = head;
         int n;
+        // 遍历原始链表长度
         for (n = 1; oldTail.next != null; n++) {
             oldTail = oldTail.next;
         }
+        // 原始链表尾部，指向原始链表头部，形成环形链表
+        // 以上for循环遍历完，即遍历到链表最后一个节点，最后一个节点赋值next节点指向头节点
         oldTail.next = head;
 
         // 找到新的newTail：（n - k % n - 1）
@@ -61,5 +64,10 @@ public class ListNodeRotateRight {
         // 截断环形链表
         newTail.next = null;
         return newHead;
+    }
+
+    public static void main(String[] args) {
+       ListNode listNode =  ListNode.tailSetListNode(5);
+       new ListNodeRotateRight().rotateRight(listNode, 2);
     }
 }
