@@ -11,8 +11,7 @@ public class ListNode {
     int val;
     ListNode next;
 
-    ListNode() {
-        HashMap hashMap = new HashMap(16);
+    public ListNode() {
 
     }
 
@@ -21,7 +20,7 @@ public class ListNode {
      *
      * @param x
      */
-    ListNode(int x) {
+   public ListNode(int x) {
         setListNode(x);
     }
 
@@ -86,7 +85,7 @@ public class ListNode {
     public static ListNode tailSetListNode(int length) {
         ListNode newListNode, head = null, tail = null;
         for (int i = 0; i < length; i++) {
-            newListNode = new ListNode(0);
+            newListNode = new ListNode();
             newListNode.val = i;
             if (head == null) {
                 head = tail = newListNode;
@@ -102,5 +101,6 @@ public class ListNode {
 
     public static void main(String[] args) {
         ListNode.tailSetListNode(5);
+        HashMap<String, String> hashMap = new HashMap<>(16);
     }
 }
