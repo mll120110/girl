@@ -24,6 +24,11 @@ public class ListNode {
         setListNode(x);
     }
 
+    public ListNode(int val, ListNode listNode) {
+       this.val = val;
+       this.next = listNode;
+    }
+
     /**
      * 设置ListNode长度，并使用尾插法
      *
@@ -96,6 +101,7 @@ public class ListNode {
                 tail = newListNode;
             }
         }
+        // head在第一次赋值的时候已经获取到内存地址，当前的next指针会指向下个对象地址
         return head;
     }
 
