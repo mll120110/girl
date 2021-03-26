@@ -53,15 +53,17 @@ public class ListNodeRotateRight {
         // 以上for循环遍历完，即遍历到链表最后一个节点，最后一个节点赋值next节点指向头节点
         oldTail.next = head;
 
-        // 找到新的newTail：（n - k % n - 1）
-        // 新的newHeal：（n - k % n）
+        // 找到新的尾结点newTail：（n - k % n - 1）
+        // 新的newHead：（n - k % n）
         ListNode newTail = head;
-        for (int i = 0; i < n - k % n -1; i++) {
+        for (int i = 0; i < (n - k % n -1); i++) {
+            System.out.println("k%N:" + k%n);
             newTail = newTail.next;
         }
         ListNode newHead = newTail.next;
 
         // 截断环形链表
+        // 截断环形链表的巧妙点在于：
         newTail.next = null;
         return newHead;
     }

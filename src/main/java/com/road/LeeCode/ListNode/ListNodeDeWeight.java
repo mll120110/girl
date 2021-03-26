@@ -20,20 +20,22 @@ public class ListNodeDeWeight {
 
     /**
      * 思路与算法
+     * <p>
      * 由于给定的链表是排好序的，因此重复的元素在链表中出现的位置是连续的，因此我们只需要对链表进行一次遍历，就可以删除重复的元素。
-     *
+     * <p>
      * 由于链表的头节点可能会被删除，因此我们需要额外使用一个哑节点（dummy node）指向链表的头节点。
-     *
-     * 具体地，我们从指针cur指向链表的哑节点，随后开始对链表进行遍历。如果当前cur.next与cur.next.next对应的元素相同，那么我们就需要将cur.next以及所有后面拥有相同元素值的链表节点全部删除。
-     *
-     * 我们记下这个元素值 xx，随后不断将cur.next 从链表中移除，直到 \textit{cur.next}cur.next 为空节点或者其元素值不等于 xx 为止。
-     *
+     * <p>
+     * 具体地，我们从指针cur指向链表的哑节点，随后开始对链表进行遍历。如果当前cur.next与cur.next.next对应的元素相同，
+     * 那么我们就需要将cur.next以及所有后面拥有相同元素值的链表节点全部删除。
+     * <p>
+     * 我们记下这个元素值 xx，随后不断将cur.next 从链表中移除，直到cur.next 为空节点或者其元素值不等于 xx 为止。
+     * <p>
      * 此时，我们将链表中所有元素值为 xx 的节点全部删除。
-     *
+     * <p>
      * 如果当前cur.next与cur.next.next对应的元素不相同，那么说明链表中只有一个元素值为cur.next 的节点，那么我们就可以将cur指向cur.next。
-     *
+     * <p>
      * 当遍历完整个链表之后，我们返回链表的的哑节点的下一个节点dummy.next 即可。
-     *
+     * <p>
      * 需要注意cur.next 以及cur.next.next 可能为空节点，如果不加以判断，可能会产生运行错误。
      *
      * @param listNode
@@ -47,7 +49,47 @@ public class ListNodeDeWeight {
         // 哑节点
         ListNode dummy = new ListNode(0, listNode);
 
-        return null;
+        // cur指向链表的哑节点
+        ListNode curr = dummy;
+        // 对链表进行遍历
+        while (curr.next != null && curr.next.next != null) {
+            // 如果当前cur.next与cur.next.next对应的元素相同
+            if (curr.next.val == curr.next.next.val) {
+                int x = curr.next.val;
+                // 相同元素遍历并重新赋值
+                while (curr.next != null && curr.next.val == x) {
+                    curr.next = curr.next.next;
+                }
+            } else {
+                curr = curr.next;
+            }
+        }
+        return dummy;
+    }
+
+    /**
+     * 重复元素不删除
+     *
+     * @param listNode
+     * @return
+     */
+    public ListNode notDeleteDuplicates(ListNode listNode) {
+        if (listNode == null || listNode.next == null) {
+            return listNode;
+        }
+
+        ListNode curr = listNode;
+        while (listNode.next != null) {
+            // 若第一个节点值与第二个节点值相等，第一个节点的next直接指向第三个节点
+            if (curr.val == curr.next.val) {
+                // 第三个节点赋值给第二个节点（第一个节点直接指向第三个节点）
+                curr.next = curr.next.next;
+            } else {
+                // 重新赋值当前节点
+                curr = curr.next;
+            }
+        }
+        return listNode;
     }
 
     /**
